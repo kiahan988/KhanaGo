@@ -1,205 +1,151 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KhanaGo — Fast & Fresh Food Delivery</title>
-  <!-- Favicon - Tab Icon -->
+  <title>KhanaGo — Fresh Food Delivered</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>" type="image/svg+xml">
   <style>
     :root {
-      --primary: #D94E28;
-      --primary-dark: #B53B1A;
-      --bg: #FFFBF5;
+      --primary: #E04F26;
+      --primary-dark: #B93B17;
+      --bg: #F6F5F2;
       --card: #FFFFFF;
-      --text: #1E1E1E;
-      --muted: #666666;
-      --border: #EFE4D6;
-      --accent-soft: #FDECE6;
-      --success-bg: #edfcf4;
-      --success-text: #065f46;
-      --success-border: #bbf7d0;
+      --text: #18181B;
+      --muted: #66666E;
+      --border: #E6E2DC;
+      --soft: #FFF1EC;
+      --success-bg: #ECFDF5;
+      --success-text: #065F46;
+      --success-border: #A7F3D0;
+      --danger-bg: #FEF2F2;
+      --danger-text: #991B1B;
+      --danger-border: #FECACA;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
       scroll-behavior: smooth;
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding-bottom: 105px;
+      line-height: 1.45;
+      min-height: 100vh;
     }
 
-    /* Header */
-    header {
+    /* First Step Onboarding Gate */
+    .onboarding-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+    }
+
+    .onboarding-card {
+      width: 100%;
+      max-width: 460px;
       background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 18px;
-      position: sticky;
-      top: 0;
-      z-index: 25;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.1);
     }
 
-    .header-top {
+    .brand-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 11px;
+      margin-bottom: 14px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .khana-logo {
-      width: 40px;
-      height: 40px;
+    .logo-badge {
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
-      display: block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
     .brand-name {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
       line-height: 1.15;
     }
 
-    .brand-tag {
-      font-size: 11px;
+    .brand-tagline {
+      font-size: 12px;
       color: var(--muted);
     }
 
-    .help-pill-btn {
-      background: var(--accent-soft);
-      color: var(--primary);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 14px;
+    .step-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
       font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
+      color: var(--muted);
+      margin-bottom: 16px;
     }
 
-    .help-pill-btn:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    /* Top Receiver & Location Strip */
-    .top-delivery-strip {
-      background: var(--accent-soft);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 12px;
+    .form-stack {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 11px;
     }
 
-    .receiver-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      font-size: 12px;
-    }
-
-    .mode-switch {
-      display: inline-flex;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .mode-btn {
-      border: none;
-      background: transparent;
-      padding: 4px 10px;
-      border-radius: 999px;
+    .field-label {
       font-size: 11px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
       color: var(--muted);
-      cursor: pointer;
+      margin-bottom: 4px;
+      display: block;
     }
 
-    .mode-btn.active {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .receiver-fields {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      background: #fff;
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px dashed #e2cbb5;
-    }
-
-    .receiver-fields.show {
+    .loc-row-input {
       display: grid;
-    }
-
-    .location-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      grid-template-columns: 1fr auto;
       gap: 8px;
-      flex-wrap: wrap;
-      font-size: 12px;
     }
 
-    .loc-status {
-      flex: 1;
-      min-width: 180px;
-      font-weight: 700;
-      color: #4a3728;
+    input, textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 11px;
+      border: 1px solid #DCD6CE;
+      background: #FCFBF9;
+      color: var(--text);
+      font-size: 13px;
     }
 
-    .loc-badge-unverified {
-      color: #b91c1c;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .loc-badge-verified {
-      color: var(--success-text);
-      background: var(--success-bg);
-      border: 1px solid var(--success-border);
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
+    input:focus, textarea:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+      background: #fff;
     }
 
     .btn {
       border: none;
-      border-radius: 8px;
-      padding: 8px 12px;
+      border-radius: 11px;
+      padding: 10px 14px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: 0.2s;
       display: inline-flex;
@@ -209,8 +155,9 @@
     }
 
     .btn-sm {
-      padding: 6px 10px;
+      padding: 7px 11px;
       font-size: 12px;
+      border-radius: 9px;
     }
 
     .btn-primary {
@@ -228,373 +175,410 @@
       border: 1px solid var(--primary);
     }
 
-    /* Main Container */
-    .container {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 0 16px;
+    .btn-outline:hover {
+      background: var(--soft);
     }
 
-    .hero {
-      background: linear-gradient(135deg, #D94E28 0%, #E86A43 100%);
-      color: #fff;
-      padding: 24px 22px;
-      border-radius: 18px;
-      margin-bottom: 22px;
-      box-shadow: 0 4px 12px -3px rgba(217, 78, 40, 0.3);
-    }
-
-    .hero h1 {
-      font-size: 24px;
-      margin-bottom: 6px;
-      font-weight: 800;
-    }
-
-    .hero p {
-      font-size: 13px;
-      opacity: 0.95;
-      max-width: 520px;
-    }
-
-    /* Location Submit Box */
-    .location-submit-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 22px;
-      scroll-margin-top: 145px;
-    }
-
-    .location-submit-card.locked {
-      border-color: #f87171;
-      background: #fffafa;
-    }
-
-    .loc-form-grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
+    .error-banner {
       margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border: 1px solid var(--danger-border);
+      font-size: 12px;
+      font-weight: 600;
+      display: none;
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      scroll-margin-top: 145px;
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #2b2b2b;
-    }
-
-    /* Shops Grid */
-    .shops-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .shop-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .shop-card:hover, .shop-card.active {
-      background: var(--accent-soft);
-      border-color: var(--primary);
-    }
-
-    .shop-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .shop-badge {
+    .status-pill-inline {
+      margin-top: 6px;
       font-size: 11px;
       font-weight: 700;
-      background: #fff;
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      border-radius: 999px;
+      color: var(--success-text);
+      display: none;
     }
 
-    .shop-rating {
-      font-size: 12px;
-      font-weight: 700;
-      color: #333;
+    /* Main App Shell (Shown Only After Customer Details & Location Submitted) */
+    .app-shell {
+      display: none;
+      padding-bottom: 105px;
     }
 
-    .shop-name {
-      font-size: 17px;
-      font-weight: 800;
-      color: #222;
-      margin-top: 2px;
+    .app-shell.active {
+      display: block;
     }
 
-    .shop-meta {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .shop-cta {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-top: 4px;
-    }
-
-    /* Menu Panel */
-    .shop-menu-panel {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 24px;
-      scroll-margin-top: 145px;
-    }
-
-    .active-shop-banner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding-bottom: 14px;
-      margin-bottom: 16px;
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 25;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
-    .active-shop-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--primary);
+    .top-bar-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .active-shop-sub {
-      font-size: 13px;
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .loc-header-btn {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 8px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .loc-main {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .loc-sub {
+      font-size: 11px;
       color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .edit-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .recipient-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .seg-control {
+      display: inline-flex;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px;
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .seg-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .receiver-inputs {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .receiver-inputs.open {
+      display: grid;
+    }
+
+    .content-wrap {
+      max-width: 960px;
+      margin: 16px auto 0;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      scroll-margin-top: 135px;
+    }
+
+    .panel.pulse {
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    .panel-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Shops & Menu */
+    .shops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .shop-tile {
+      background: #FCFBF9;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 13px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 7px;
+      transition: 0.2s;
+    }
+
+    .shop-tile:hover, .shop-tile.selected {
+      background: var(--soft);
+      border-color: var(--primary);
+    }
+
+    .tile-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tile-cat {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .tile-rating {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tile-name {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .tile-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tile-cta {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .food-card {
-      background: #FFFDFA;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
       gap: 12px;
-    }
-
-    .food-rest {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .food-name {
-      font-size: 17px;
-      font-weight: 800;
-      margin-top: 2px;
-      color: #222;
-    }
-
-    .food-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .food-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 8px;
-      padding-top: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .price {
-      font-size: 17px;
-      font-weight: 800;
-      color: #111;
-    }
-
-    /* Cart & Help Panels */
-    .cart-box, .help-box {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 22px;
-      scroll-margin-top: 145px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px dashed #e0d4c7;
-      font-size: 14px;
-    }
-
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qty-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+    .dish-card {
+      background: #FCFBF9;
       border: 1px solid var(--border);
-      background: #fdfaf7;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      color: var(--primary);
-    }
-
-    .input-group {
-      margin-top: 14px;
-      display: grid;
+      border-radius: 13px;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 10px;
     }
 
-    input {
-      width: 100%;
-      padding: 11px 12px;
-      border-radius: 10px;
-      border: 1px solid #d8c8b8;
-      background: #fdfaf7;
-      font-size: 14px;
+    .dish-shop {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
     }
 
-    input:focus {
-      outline: 2px solid var(--primary);
-      border-color: transparent;
+    .dish-name {
+      font-size: 15px;
+      font-weight: 800;
+      margin-top: 2px;
     }
 
-    .total-row {
+    .dish-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .dish-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .dish-price {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    /* Cart */
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 13px;
+    }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--primary);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .summary-line {
       display: flex;
       justify-content: space-between;
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 800;
-      margin: 16px 0;
-      color: #111;
+      margin: 14px 0;
     }
 
-    .order-msg {
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 12px;
+    .order-confirm {
+      margin-top: 12px;
+      padding: 11px 13px;
+      border-radius: 11px;
       background: var(--success-bg);
       color: var(--success-text);
-      font-size: 13px;
-      display: none;
       border: 1px solid var(--success-border);
-    }
-
-    .warn-msg {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: #fef2f2;
-      color: #991b1b;
       font-size: 12px;
       font-weight: 600;
-      border: 1px solid #fecaca;
       display: none;
     }
 
-    /* Help Chat Thread */
-    .chat-thread {
-      max-height: 250px;
+    /* Help Chat */
+    .chat-list {
+      max-height: 210px;
       overflow-y: auto;
-      background: #fdfaf7;
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
+      padding: 11px;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .chat-bubble {
-      max-width: 85%;
-      padding: 9px 12px;
+    .bubble {
+      max-width: 84%;
+      padding: 8px 12px;
       border-radius: 12px;
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    .chat-bubble.user {
+    .bubble.out {
       align-self: flex-end;
       background: var(--primary);
       color: #fff;
     }
 
-    .chat-bubble.support {
+    .bubble.in {
       align-self: flex-start;
-      background: var(--accent-soft);
-      color: #3d2c1e;
+      background: var(--soft);
+      color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .chat-meta {
+    .bubble-meta {
       font-size: 10px;
       opacity: 0.75;
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
-    /* Floating Bottom Bar */
-    .bottom-nav-wrap {
+    /* Floating Bottom Bar matching reference screenshot */
+    .floating-nav-wrap {
       position: fixed;
-      bottom: 12px;
+      bottom: 14px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: center;
-      padding: 0 14px;
-      z-index: 30;
+      padding: 0 16px;
+      z-index: 40;
       pointer-events: none;
     }
 
-    .bottom-nav {
+    .floating-nav {
       pointer-events: auto;
       width: 100%;
-      max-width: 460px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 6px 10px;
@@ -602,187 +586,232 @@
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-      box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.18);
     }
 
-    .nav-item {
+    .nav-tab {
       flex: 1;
       border: none;
       background: transparent;
+      color: var(--muted);
       border-radius: 999px;
       padding: 7px 6px;
+      font-size: 11px;
+      font-weight: 700;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 2px;
       cursor: pointer;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
       position: relative;
     }
 
-    .nav-item .nav-icon {
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .nav-item.active {
+    .nav-tab.active {
       background: var(--primary);
       color: #fff;
     }
 
     .nav-badge {
       position: absolute;
-      top: 3px;
-      right: 14px;
+      top: 2px;
+      right: 13px;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 999px;
       background: var(--primary);
       color: #fff;
       border: 2px solid #fff;
       font-size: 10px;
       font-weight: 800;
-      min-width: 18px;
-      height: 18px;
-      border-radius: 999px;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 0 4px;
     }
 
-    .nav-item.active .nav-badge {
+    .nav-tab.active .nav-badge {
       background: #fff;
       color: var(--primary);
       border-color: var(--primary);
     }
 
     @media (max-width: 600px) {
-      .receiver-fields, .loc-form-grid { grid-template-columns: 1fr; }
-      .shops-grid, .menu-grid { grid-template-columns: 1fr; }
+      .loc-row-input, .receiver-inputs, .shops-grid, .menu-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-<body id="topSection">
+<body>
 
-  <header>
-    <div class="header-top">
-      <div class="brand">
-        <svg class="khana-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="KhanaGo Logo">
-          <rect width="42" height="42" rx="12" fill="#D94E28"/>
-          <path d="M13 12V21M16 12V21M13 16.5H16M14.5 16.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M25 12C27.5 12 29 14.2 29 17.5C29 20.2 27.5 22 25.5 22.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M21 26H31M28 23.5L31 26L28 28.5" stroke="#FDECE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+  <!-- Step 1: Customer Details, Number, Full Address & Location Gate -->
+  <div class="onboarding-wrap" id="onboardingScreen">
+    <div class="onboarding-card">
+      <div class="brand-header">
+        <div class="logo-badge">K</div>
         <div>
           <div class="brand-name">KhanaGo</div>
-          <div class="brand-tag">Garma-garam khana, aapke dwaar</div>
+          <div class="brand-tagline">Fast &amp; fresh food delivery</div>
         </div>
       </div>
 
-      <button type="button" class="help-pill-btn" onclick="handleBottomNav('help')">Help</button>
-    </div>
+      <h1 class="step-title">Complete Your Delivery Details</h1>
+      <p class="step-desc">Enter your name, phone number, full address, and location to continue to the app.</p>
 
-    <!-- Top Receiver Option & Mandatory Location Status -->
-    <div class="top-delivery-strip">
-      <div class="receiver-row">
+      <form class="form-stack" onsubmit="saveCustomerProfile(event)">
         <div>
-          <strong>Delivery:</strong>
-          <span id="modeSummaryText">Apna Saved Address</span>
+          <label class="field-label" for="onboardName">Full Name</label>
+          <input type="text" id="onboardName" placeholder="Enter your full name" required />
         </div>
-        <div class="mode-switch">
-          <button type="button" class="mode-btn active" id="modeSelfBtn" onclick="setDeliveryMode('self')">Apne Liye</button>
-          <button type="button" class="mode-btn" id="modeReceiverBtn" onclick="setDeliveryMode('receiver')">Kisi Aur Ko Bhejein</button>
-        </div>
-      </div>
 
-      <!-- Receiver Inputs (Visible when Kisi Aur Ko Bhejein is selected) -->
-      <div class="receiver-fields" id="receiverFields">
-        <input type="text" id="receiverNameInput" placeholder="Receiver ka naam likhein" oninput="saveReceiverInfo()" />
-        <input type="text" id="receiverPhoneOrNote" placeholder="Receiver mobile / delivery note" oninput="saveReceiverInfo()" />
-      </div>
-
-      <div class="location-row">
-        <div class="loc-status" id="topLocationText">📍 Location submit nahi hui hai (Order ke liye zaroori)</div>
-        <span class="loc-badge-unverified" id="locationStatusBadge">Location Required</span>
-        <button type="button" class="btn btn-primary btn-sm" onclick="focusLocationCard()">Location Set / Edit</button>
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-    <div class="hero">
-      <h1>Bhookh lagi hai? KhanaGo haazir hai!</h1>
-      <p>Pehle apni location submit karein, phir kisi bhi shop par tap karke uska menu dekhein aur order karein.</p>
-    </div>
-
-    <!-- Mandatory Location Submission Card -->
-    <div class="location-submit-card locked" id="locationSubmitCard">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-        <h2 class="section-title">1. Delivery Location Submit Karein (Zaroori)</h2>
-        <button type="button" class="btn btn-outline btn-sm" onclick="detectLocation()">📡 GPS Detect</button>
-      </div>
-      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
-        Bina location submit kiye order place nahi hoga. Ek baar address submit karne par wo save ho jayega.
-      </p>
-
-      <div class="loc-form-grid">
-        <input type="text" id="savedAddressInput" placeholder="Apna poora delivery address / house no. / area likhein" />
-        <button type="button" class="btn btn-primary" onclick="submitAndSaveLocation()">Location Submit Karein</button>
-      </div>
-
-      <div class="warn-msg" id="locationWarning">
-        ⚠️ Kripya order karne se pehle apna address/location likh kar "Location Submit Karein" dabayein.
-      </div>
-      <div class="order-msg" id="locationSavedNotice" style="margin-top:10px;"></div>
-    </div>
-
-    <!-- Shops Section -->
-    <div class="section-header" id="shopsSectionHeader">
-      <h2 class="section-title">2. Aas-Paas Ki Shops</h2>
-      <span style="font-size: 12px; color: var(--muted);">Kisi shop par tap karke menu dekhein</span>
-    </div>
-    <div class="shops-grid" id="shopsGrid"></div>
-
-    <!-- Selected Shop's Menu Directly Below Shops -->
-    <div class="shop-menu-panel" id="shopMenuSection">
-      <div class="active-shop-banner">
         <div>
-          <div class="active-shop-title" id="activeShopTitle">Shop Menu</div>
-          <div class="active-shop-sub" id="activeShopSub">Kisi bhi item ko cart mein jodein</div>
+          <label class="field-label" for="onboardPhone">Phone Number</label>
+          <input type="tel" id="onboardPhone" placeholder="Enter 10-digit mobile number" required />
         </div>
-        <button type="button" class="btn btn-outline" onclick="selectAllShops()">Sabhi Shops Ka Menu</button>
+
+        <div>
+          <label class="field-label" for="onboardAddress">Full Address</label>
+          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, landmark, city, pincode" required></textarea>
+        </div>
+
+        <div>
+          <label class="field-label" for="onboardLocation">Location (GPS or Pin / Area)</label>
+          <div class="loc-row-input">
+            <input type="text" id="onboardLocation" placeholder="Tap Detect GPS or enter your exact location" required />
+            <button type="button" class="btn btn-outline btn-sm" onclick="detectOnboardingGPS()">Detect GPS</button>
+          </div>
+          <div class="status-pill-inline" id="gpsStatusText"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 4px;">
+          Continue to KhanaGo
+        </button>
+      </form>
+
+      <div class="error-banner" id="onboardingError">
+        Please fill in your name, phone number, full address, and location to continue.
       </div>
-      <div class="menu-grid" id="menuGrid"></div>
     </div>
+  </div>
 
-    <!-- Order Cart -->
-    <div class="cart-box" id="cartSection">
-      <h2 class="section-title" style="margin-bottom: 10px;">Aapka Order Cart</h2>
-      <div id="cartItems" style="color: #777; font-style: italic; padding: 8px 0;">Cart abhi khaali hai. Upar se koi item add karein.</div>
+  <!-- Step 2: Main App View (Unlocked After Submitting Details & Location) -->
+  <div class="app-shell" id="appShell">
+    <header class="top-bar">
+      <div class="top-bar-inner">
+        <div class="top-row">
+          <button type="button" class="loc-header-btn" onclick="openOnboardingEditor()">
+            <div style="min-width: 0;">
+              <div class="loc-main" id="barLocationTitle">📍 Location</div>
+              <div class="loc-sub" id="barAddressSub">Full address &amp; contact</div>
+            </div>
+            <span class="edit-tag">Edit</span>
+          </button>
 
-      <div class="input-group" id="checkoutForm">
-        <input type="text" id="customerName" placeholder="Aapka naam likhein" oninput="saveCustomerName()" />
-        <input type="text" id="orderDeliveryAddressDisplay" placeholder="Saved location apne aap yahan aayegi" readonly />
+          <button type="button" class="btn btn-outline btn-sm" onclick="navigateApp('help')">Help</button>
+        </div>
+
+        <div class="recipient-strip">
+          <span>Delivering: <strong id="recipientSummary">Self</strong></span>
+          <div class="seg-control">
+            <button type="button" class="seg-btn active" id="segSelf" onclick="switchRecipient('self')">Self</button>
+            <button type="button" class="seg-btn" id="segReceiver" onclick="switchRecipient('receiver')">Receiver</button>
+          </div>
+        </div>
+
+        <div class="receiver-inputs" id="receiverBox">
+          <input type="text" id="recName" placeholder="Receiver full name" oninput="saveReceiver()" />
+          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="saveReceiver()" />
+        </div>
       </div>
+    </header>
 
-      <div class="total-row">
-        <span>Total Payable</span>
-        <span id="cartTotal">₹0</span>
-      </div>
+    <main class="content-wrap">
+      <!-- Shops & Selected Shop Menu -->
+      <section class="panel" id="sec-shops">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Shops</h2>
+            <p class="panel-sub">Tap any shop to view its menu below.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="showAllItems()">All Menus</button>
+        </div>
 
-      <button type="button" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 12px;" onclick="placeOrder()">
-        Order Place Karein
-      </button>
+        <div class="shops-grid" id="shopsGrid"></div>
 
-      <div class="order-msg" id="orderConfirmation"></div>
+        <div>
+          <div class="panel-head" style="margin-top: 16px; margin-bottom: 0;">
+            <div>
+              <h3 class="panel-title" id="activeMenuTitle" style="font-size: 15px;">Menu</h3>
+              <p class="panel-sub" id="activeMenuSub">Tap a shop above</p>
+            </div>
+          </div>
+          <div class="menu-grid" id="menuGrid"></div>
+        </div>
+      </section>
+
+      <!-- Cart -->
+      <section class="panel" id="sec-cart">
+        <div class="panel-head">
+          <h2 class="panel-title">Cart</h2>
+          <span class="panel-sub" id="cartCountLabel">0 items</span>
+        </div>
+
+        <div id="cartList" class="panel-sub">Your cart is empty.</div>
+
+        <div class="summary-line">
+          <span>Total Payable</span>
+          <span id="cartTotalVal">₹0</span>
+        </div>
+
+        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="submitOrder()">
+          Place Order
+        </button>
+
+        <div class="order-confirm" id="orderConfirmBox"></div>
+      </section>
+
+      <!-- Help Chat -->
+      <section class="panel" id="sec-help">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Help</h2>
+            <p class="panel-sub">Send a chat message for order or delivery assistance.</p>
+          </div>
+        </div>
+
+        <div class="chat-list" id="chatThread"></div>
+
+        <div class="loc-row-input">
+          <input type="text" id="helpMessageInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') postHelpMessage()" />
+          <button type="button" class="btn btn-primary" onclick="postHelpMessage()">Send</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Bottom Navigation Bar -->
+    <div class="floating-nav-wrap">
+      <nav class="floating-nav" aria-label="Bottom Navigation">
+        <button type="button" class="nav-tab active" id="tab-home" onclick="navigateApp('home')">
+          <span>🏠</span>
+          <span>Home</span>
+        </button>
+        <button type="button" class="nav-tab" id="tab-shops" onclick="navigateApp('shops')">
+          <span>🏪</span>
+          <span>Shops</span>
+        </button>
+        <button type="button" class="nav-tab" id="tab-cart" onclick="navigateApp('cart')">
+          <span class="nav-badge" id="navBadgeCount">0</span>
+          <span>🛒</span>
+          <span>Cart</span>
+        </button>
+        <button type="button" class="nav-tab" id="tab-help" onclick="navigateApp('help')">
+          <span>💬</span>
+          <span>Help</span>
+        </button>
+      </nav>
     </div>
+  </div>
 
-    <!-- Help Chat Section (Chat Only, No Number, No Dashboard Here) -->
-    <div class="help-box" id="helpSection">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
-        <h2 class="section-title">Help</h2>
-        <span style="font-size:11px; font-weight:700; color:var(--primary); background:var(--accent-soft); padding:4px 10px; border-radius:999px;">Help Chat</span>
-      </div>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">
-        Order ya delivery se judi
+  <script>
+    const STORE_KEYS = {
+   
