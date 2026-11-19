@@ -15,12 +15,10 @@
       --muted: #66666E;
       --border: #E6E2DC;
       --soft: #FFF1EC;
-      --success-bg: #ECFDF5;
-      --success-text: #065F46;
-      --success-border: #A7F3D0;
-      --danger-bg: #FEF2F2;
-      --danger-text: #991B1B;
-      --danger-border: #FECACA;
+      --ok-bg: #ECFDF5;
+      --ok-text: #065F46;
+      --err-bg: #FEF2F2;
+      --err-text: #991B1B;
     }
 
     * {
@@ -38,8 +36,7 @@
       min-height: 100vh;
     }
 
-    /* Step 1 Screen */
-    #step1Screen {
+    #setupView {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -47,7 +44,7 @@
       padding: 20px 16px;
     }
 
-    .card-box {
+    .box {
       width: 100%;
       max-width: 470px;
       background: var(--card);
@@ -57,16 +54,16 @@
       box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.1);
     }
 
-    .brand-row {
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
 
-    .brand-icon {
+    .logo {
       width: 44px;
       height: 44px;
       border-radius: 13px;
@@ -77,42 +74,31 @@
       flex-shrink: 0;
     }
 
-    .brand-name {
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1.15;
-    }
-
-    .brand-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .heading-1 {
-      font-size: 17px;
+    .title {
+      font-size: 18px;
       font-weight: 800;
       margin-bottom: 4px;
     }
 
-    .subtext {
+    .sub {
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 14px;
     }
 
-    .stack {
+    .form-col {
       display: flex;
       flex-direction: column;
       gap: 11px;
+      margin-top: 12px;
     }
 
-    .grid-2 {
+    .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .label {
+    .lbl {
       display: block;
       font-size: 11px;
       font-weight: 700;
@@ -122,10 +108,10 @@
       margin-bottom: 4px;
     }
 
-    .loc-flex {
-      display: flex;
+    .loc-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 8px;
-      align-items: center;
     }
 
     input, textarea {
@@ -164,22 +150,22 @@
       border-radius: 10px;
     }
 
-    .btn-primary {
+    .btn-main {
       background: var(--primary);
       color: #fff;
     }
 
-    .btn-primary:hover {
+    .btn-main:hover {
       background: var(--primary-dark);
     }
 
-    .btn-outline {
+    .btn-line {
       background: #fff;
       color: var(--primary);
       border: 1px solid var(--primary);
     }
 
-    .msg-box {
+    .notice {
       margin-top: 10px;
       padding: 10px 12px;
       border-radius: 10px;
@@ -188,76 +174,47 @@
       display: none;
     }
 
-    .msg-box.err {
+    .notice.ok {
       display: block;
-      background: var(--danger-bg);
-      color: var(--danger-text);
-      border: 1px solid var(--danger-border);
+      background: var(--ok-bg);
+      color: var(--ok-text);
     }
 
-    .msg-box.ok {
+    .notice.err {
       display: block;
-      background: var(--success-bg);
-      color: var(--success-text);
-      border: 1px solid var(--success-border);
+      background: var(--err-bg);
+      color: var(--err-text);
     }
 
-    .helper-link-btn {
-      margin-top: 6px;
-      background: none;
-      border: none;
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: underline;
-      cursor: pointer;
+    #appView {
       display: none;
+      padding-bottom: 100px;
     }
 
-    /* Step 2 Screen */
-    #step2Screen {
-      display: none;
-      padding-bottom: 105px;
-    }
-
-    .app-header {
+    .top-hdr {
       position: sticky;
       top: 0;
-      z-index: 25;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(12px);
+      z-index: 20;
+      background: #fff;
       border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
     }
 
-    .app-header-inner {
+    .top-hdr-in {
       max-width: 960px;
       margin: 0 auto;
-      padding: 10px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .top-bar-row {
+    .hdr-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 10px;
     }
 
-    .mini-logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      cursor: pointer;
-    }
-
-    .loc-pill-btn {
+    .addr-btn {
       flex: 1;
       min-width: 0;
       background: var(--bg);
@@ -272,7 +229,7 @@
       text-align: left;
     }
 
-    .loc-title {
+    .addr-main {
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
@@ -280,7 +237,7 @@
       text-overflow: ellipsis;
     }
 
-    .loc-addr {
+    .addr-sub {
       font-size: 11px;
       color: var(--muted);
       white-space: nowrap;
@@ -288,7 +245,7 @@
       text-overflow: ellipsis;
     }
 
-    .mode-bar {
+    .rec-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -298,7 +255,7 @@
       color: var(--muted);
     }
 
-    .switch-pill {
+    .pill-group {
       display: inline-flex;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -306,7 +263,7 @@
       padding: 2px;
     }
 
-    .switch-btn {
+    .pill-btn {
       border: none;
       background: transparent;
       color: var(--muted);
@@ -317,39 +274,39 @@
       cursor: pointer;
     }
 
-    .switch-btn.active {
+    .pill-btn.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .receiver-row {
+    .rec-fields {
       display: none;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
 
-    .receiver-row.show {
+    .rec-fields.open {
       display: grid;
     }
 
-    .app-body {
+    .main-wrap {
       max-width: 960px;
       margin: 16px auto 0;
       padding: 0 16px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .section-card {
+    .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 16px;
-      scroll-margin-top: 135px;
+      scroll-margin-top: 130px;
     }
 
-    .section-top {
+    .card-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -358,18 +315,13 @@
       flex-wrap: wrap;
     }
 
-    .section-heading {
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .shops-list {
+    .grid-shops {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 12px;
     }
 
-    .shop-box {
+    .shop-card {
       background: #FCFBF9;
       border: 1.5px solid var(--border);
       border-radius: 14px;
@@ -378,24 +330,24 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 7px;
+      gap: 6px;
     }
 
-    .shop-box.active {
+    .shop-card.active {
       background: var(--soft);
       border-color: var(--primary);
     }
 
-    .menu-list {
+    .grid-menu {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 12px;
       margin-top: 14px;
       padding-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .food-box {
+    .item-card {
       background: #FCFBF9;
       border: 1px solid var(--border);
       border-radius: 13px;
@@ -406,7 +358,7 @@
       gap: 10px;
     }
 
-    .food-foot {
+    .item-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -414,7 +366,7 @@
       border-top: 1px solid var(--border);
     }
 
-    .cart-row {
+    .cart-line {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -423,7 +375,7 @@
       font-size: 13px;
     }
 
-    .qty-wrap {
+    .qty-box {
       display: flex;
       align-items: center;
       gap: 7px;
@@ -440,7 +392,7 @@
       cursor: pointer;
     }
 
-    .total-row {
+    .total-line {
       display: flex;
       justify-content: space-between;
       font-size: 17px;
@@ -448,20 +400,20 @@
       margin: 14px 0;
     }
 
-    .chat-area {
-      max-height: 200px;
+    .chat-box {
+      max-height: 190px;
       overflow-y: auto;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 11px;
+      padding: 10px;
       margin-bottom: 10px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .chat-msg {
+    .msg-bubble {
       max-width: 84%;
       padding: 8px 12px;
       border-radius: 12px;
@@ -471,7 +423,7 @@
       color: #fff;
     }
 
-    .bottom-dock-wrap {
+    .nav-wrap {
       position: fixed;
       bottom: 14px;
       left: 0;
@@ -479,16 +431,15 @@
       display: flex;
       justify-content: center;
       padding: 0 16px;
-      z-index: 40;
+      z-index: 30;
       pointer-events: none;
     }
 
-    .bottom-dock {
+    .nav-bar {
       pointer-events: auto;
       width: 100%;
       max-width: 420px;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(12px);
+      background: #fff;
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 6px 10px;
@@ -498,7 +449,7 @@
       box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.18);
     }
 
-    .dock-btn {
+    .nav-btn {
       flex: 1;
       border: none;
       background: transparent;
@@ -515,12 +466,12 @@
       position: relative;
     }
 
-    .dock-btn.active {
+    .nav-btn.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .dock-badge {
+    .badge {
       position: absolute;
       top: 2px;
       right: 13px;
@@ -538,213 +489,202 @@
       justify-content: center;
     }
 
-    .dock-btn.active .dock-badge {
+    .nav-btn.active .badge {
       background: #fff;
       color: var(--primary);
       border-color: var(--primary);
     }
 
     @media (max-width: 600px) {
-      .grid-2, .loc-flex, .receiver-row, .shops-list, .menu-list {
+      .two-col, .loc-bar, .rec-fields, .grid-shops, .grid-menu {
         grid-template-columns: 1fr;
-      }
-      .loc-flex {
-        display: grid;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Step 1: Customer Details Screen -->
-  <div id="step1Screen">
-    <div class="card-box">
-      <div class="brand-row">
-        <div class="brand-icon" aria-hidden="true">
+  <!-- Step 1: Customer Details -->
+  <div id="setupView">
+    <div class="box">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
           </svg>
         </div>
         <div>
-          <div class="brand-name">KhanaGo</div>
-          <div class="brand-sub">Fast &amp; fresh food delivery</div>
+          <div style="font-size:20px; font-weight:800; line-height:1.15;">KhanaGo</div>
+          <div class="sub">Fast &amp; fresh food delivery</div>
         </div>
       </div>
 
-      <h1 class="heading-1">Customer Delivery Details</h1>
-      <p class="subtext">Fill in your details and location to open the app.</p>
+      <h1 class="title">Delivery Details</h1>
+      <p class="sub">Enter your details and location to continue to the app.</p>
 
-      <div class="stack">
+      <div class="form-col">
         <div>
-          <label class="label" for="inpName">Full Name</label>
-          <input type="text" id="inpName" placeholder="Enter your name" />
+          <label class="lbl" for="fName">Full Name</label>
+          <input type="text" id="fName" placeholder="Enter your name" />
         </div>
 
         <div>
-          <label class="label" for="inpPhone">Phone Number</label>
-          <input type="tel" id="inpPhone" placeholder="Enter mobile number" />
+          <label class="lbl" for="fPhone">Phone Number</label>
+          <input type="tel" id="fPhone" placeholder="Enter mobile number" />
         </div>
 
         <div>
-          <label class="label" for="inpAddress">Full Address</label>
-          <textarea id="inpAddress" rows="2" placeholder="House / flat no., street, area"></textarea>
+          <label class="lbl" for="fAddress">Full Address</label>
+          <textarea id="fAddress" rows="2" placeholder="House / flat no., street, area"></textarea>
         </div>
 
         <div>
-          <label class="label" for="inpLandmark">Landmark</label>
-          <input type="text" id="inpLandmark" placeholder="Nearby landmark" />
+          <label class="lbl" for="fLandmark">Landmark</label>
+          <input type="text" id="fLandmark" placeholder="Nearby landmark" />
         </div>
 
-        <div class="grid-2">
+        <div class="two-col">
           <div>
-            <label class="label" for="inpState">State</label>
-            <input type="text" id="inpState" placeholder="State" />
+            <label class="lbl" for="fState">State</label>
+            <input type="text" id="fState" placeholder="State" />
           </div>
-
           <div>
-            <label class="label" for="inpPincode">Pincode</label>
-            <input type="text" id="inpPincode" inputmode="numeric" maxlength="6" placeholder="Pincode" />
+            <label class="lbl" for="fPincode">Pincode</label>
+            <input type="text" id="fPincode" inputmode="numeric" maxlength="6" placeholder="Pincode" />
           </div>
         </div>
 
         <div>
-          <label class="label" for="inpLocation">Location</label>
-          <div class="loc-flex">
-            <input type="text" id="inpLocation" placeholder="Tap Use Location or type location" />
-            <button type="button" class="btn btn-outline btn-sm" id="btnUseLoc" onclick="onUseLocationTap()">Use Location</button>
+          <label class="lbl" for="fLocation">Location</label>
+          <div class="loc-bar">
+            <input type="text" id="fLocation" placeholder="Tap Use Location or type location" />
+            <button type="button" class="btn btn-line btn-sm" id="btnUseLoc" onclick="getLocNow()">Use Location</button>
           </div>
-          <button type="button" class="helper-link-btn" id="btnFillFromAddress" onclick="fillLocationFromAddress()">
-            Use typed address &amp; state as location
-          </button>
-          <div class="msg-box" id="locStatusBox"></div>
+          <div class="notice" id="locNotice"></div>
         </div>
 
-        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 4px;" onclick="onContinueTap()">
+        <button type="button" class="btn btn-main" style="width:100%; padding:12px;" onclick="goToApp()">
           Continue to KhanaGo
         </button>
       </div>
 
-      <div class="msg-box" id="step1ErrorBox"></div>
+      <div class="notice" id="setupNotice"></div>
     </div>
   </div>
 
-  <!-- Step 2: Main App Screen -->
-  <div id="step2Screen">
-    <header class="app-header">
-      <div class="app-header-inner">
-        <div class="top-bar-row">
-          <div class="mini-logo" onclick="switchTab('home')" title="Home">
+  <!-- Step 2: Main App -->
+  <div id="appView">
+    <header class="top-hdr">
+      <div class="top-hdr-in">
+        <div class="hdr-row">
+          <div class="logo" style="width:34px; height:34px; border-radius:10px; cursor:pointer;" onclick="goTab('home')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
             </svg>
           </div>
 
-          <button type="button" class="loc-pill-btn" onclick="openStep1()">
-            <div style="min-width: 0;">
-              <div class="loc-title" id="hdrLocText">📍 Location</div>
-              <div class="loc-addr" id="hdrAddrText">Address details</div>
+          <button type="button" class="addr-btn" onclick="openSetup()">
+            <div style="min-width:0;">
+              <div class="addr-main" id="topLoc">📍 Location</div>
+              <div class="addr-sub" id="topAddr">Address</div>
             </div>
-            <span style="font-size: 11px; font-weight: 700; color: var(--primary);">Edit</span>
+            <span style="font-size:11px; font-weight:700; color:var(--primary);">Edit</span>
           </button>
 
-          <button type="button" class="btn btn-outline btn-sm" onclick="switchTab('help')">Help</button>
+          <button type="button" class="btn btn-line btn-sm" onclick="goTab('help')">Help</button>
         </div>
 
-        <div class="mode-bar">
-          <span>Delivering to: <strong id="hdrRecipient">Self</strong></span>
-          <div class="switch-pill">
-            <button type="button" class="switch-btn active" id="btnSelf" onclick="setRecipientMode('self')">Self</button>
-            <button type="button" class="switch-btn" id="btnReceiver" onclick="setRecipientMode('receiver')">Receiver</button>
+        <div class="rec-bar">
+          <span>Delivering to: <strong id="recSummary">Self</strong></span>
+          <div class="pill-group">
+            <button type="button" class="pill-btn active" id="pSelf" onclick="changeRecMode('self')">Self</button>
+            <button type="button" class="pill-btn" id="pRec" onclick="changeRecMode('receiver')">Receiver</button>
           </div>
         </div>
 
-        <div class="receiver-row" id="receiverInputs">
-          <input type="text" id="inpRecName" placeholder="Receiver full name" oninput="saveReceiverInfo()" />
-          <input type="text" id="inpRecPhone" placeholder="Receiver phone / note" oninput="saveReceiverInfo()" />
+        <div class="rec-fields" id="recBox">
+          <input type="text" id="recName" placeholder="Receiver full name" oninput="saveRec()" />
+          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="saveRec()" />
         </div>
       </div>
     </header>
 
-    <main class="app-body">
-      <!-- Shops & Menu Below -->
-      <section class="section-card" id="boxShops">
-        <div class="section-top">
+    <main class="main-wrap">
+      <section class="card" id="secShops">
+        <div class="card-head">
           <div>
-            <h2 class="section-heading">Shops</h2>
-            <p class="brand-sub">Tap any shop to see its menu below.</p>
+            <h2 class="title" style="margin:0;">Shops</h2>
+            <p class="sub">Tap any shop to view its menu below.</p>
           </div>
-          <button type="button" class="btn btn-outline btn-sm" onclick="selectShop('ALL')">All Menus</button>
+          <button type="button" class="btn btn-line btn-sm" onclick="pickShop('ALL')">All Menus</button>
         </div>
 
-        <div class="shops-list" id="shopsContainer"></div>
+        <div class="grid-shops" id="shopsGrid"></div>
 
         <div>
-          <div class="section-top" style="margin-top: 16px; margin-bottom: 0;">
+          <div class="card-head" style="margin-top:16px; margin-bottom:0;">
             <div>
-              <h3 class="section-heading" id="menuTitle" style="font-size: 15px;">Menu</h3>
-              <p class="brand-sub" id="menuSub">Select a shop above</p>
+              <h3 class="title" id="menuHead" style="font-size:15px; margin:0;">Menu</h3>
+              <p class="sub" id="menuSub">Select a shop above</p>
             </div>
           </div>
-          <div class="menu-list" id="menuContainer"></div>
+          <div class="grid-menu" id="menuGrid"></div>
         </div>
       </section>
 
-      <!-- Cart -->
-      <section class="section-card" id="boxCart">
-        <div class="section-top">
-          <h2 class="section-heading">Cart</h2>
-          <span class="brand-sub" id="cartCountText">0 items</span>
+      <section class="card" id="secCart">
+        <div class="card-head">
+          <h2 class="title" style="margin:0;">Cart</h2>
+          <span class="sub" id="cartCount">0 items</span>
         </div>
 
-        <div id="cartItemsContainer" class="brand-sub">Your cart is empty.</div>
+        <div id="cartItems" class="sub">Your cart is empty.</div>
 
-        <div class="total-row">
+        <div class="total-line">
           <span>Total Payable</span>
-          <span id="cartTotalText">₹0</span>
+          <span id="cartTotal">₹0</span>
         </div>
 
-        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="confirmOrder()">
+        <button type="button" class="btn btn-main" style="width:100%; padding:12px;" onclick="placeOrderNow()">
           Place Order
         </button>
 
-        <div class="msg-box" id="orderStatusBox"></div>
+        <div class="notice" id="orderNotice"></div>
       </section>
 
-      <!-- Help Chat -->
-      <section class="section-card" id="boxHelp">
-        <div class="section-top">
+      <section class="card" id="secHelp">
+        <div class="card-head">
           <div>
-            <h2 class="section-heading">Help</h2>
-            <p class="brand-sub">Send a message for support.</p>
+            <h2 class="title" style="margin:0;">Help</h2>
+            <p class="sub">Send a message for support.</p>
           </div>
         </div>
 
-        <div class="chat-area" id="chatContainer"></div>
+        <div class="chat-box" id="chatList"></div>
 
-        <div class="loc-flex">
-          <input type="text" id="inpChat" placeholder="Write your message..." onkeydown="if(event.key==='Enter') sendChat()" />
-          <button type="button" class="btn btn-primary" onclick="sendChat()">Send</button>
+        <div class="loc-bar">
+          <input type="text" id="chatInput" placeholder="Write your message..." onkeydown="if(event.key==='Enter') sendChatMsg()" />
+          <button type="button" class="btn btn-main" onclick="sendChatMsg()">Send</button>
         </div>
       </section>
     </main>
 
-    <!-- Floating Bottom Navigation Bar -->
-    <div class="bottom-dock-wrap">
-      <nav class="bottom-dock" aria-label="Bottom Navigation">
-        <button type="button" class="dock-btn active" id="dock-home" onclick="switchTab('home')">
+    <div class="nav-wrap">
+      <nav class="nav-bar" aria-label="Bottom Navigation">
+        <button type="button" class="nav-btn active" id="n-home" onclick="goTab('home')">
           <span>🏠</span>
           <span>Home</span>
         </button>
-        <button type="button" class="dock-btn" id="dock-shops" onclick="switchTab('shops')">
+        <button type="button" class="nav-btn" id="n-shops" onclick="goTab('shops')">
           <span>🏪</span>
           <span>Shops</span>
         </button>
-        <button type="button" class="dock-btn" id="dock-cart" onclick="switchTab('cart')">
-          <span class="dock-badge" id="dockCartBadge">0</span>
+        <button type="button" class="nav-btn" id="n-cart" onclick="goTab('cart')">
+          <span class="badge" id="cartBadge">0</span>
           <span>🛒</span>
           <span>Cart</span>
         </button>
-        <button type="button" class="dock-btn" id="dock-help" onclick="switchTab('help')">
+        <button type="button" class="nav-btn" id="n-help" onclick="goTab('help')">
           <span>💬</span>
           <span>Help</span>
         </button>
@@ -753,16 +693,16 @@
   </div>
 
   <script>
-    const KEYS = {
-      USER: "khanago_user_v9",
-      MODE: "khanago_mode_v9",
-      RECEIVER: "khanago_receiver_v9",
-      CHATS: "khanago_chats_v9",
-      ORDERS: "khanago_orders_v9",
-      MERCHANT_SHOPS: "khanago_merchant_shops"
+    const DB = {
+      USER: "khanago_user_final_v1",
+      MODE: "khanago_mode_final_v1",
+      REC: "khanago_rec_final_v1",
+      CHAT: "khanago_chat_final_v1",
+      ORDERS: "khanago_orders_final_v1",
+      MERCHANT: "khanago_merchant_shops"
     };
 
-    const defaultShops = [
+    const baseList = [
       {
         id: "annapurna-kitchen",
         name: "Annapurna Kitchen",
@@ -771,4 +711,58 @@
         eta: "25–30 mins",
         items: [
           { id: "ak-1", name: "Classic Home Thali", desc: "4 rotis, dal tadka, seasonal sabzi, rice, and salad.", price: 120 },
-          { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 
+          { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 85 }
+        ]
+      },
+      {
+        id: "tandoor-junction",
+        name: "Tandoor Junction",
+        category: "Rolls & Grills",
+        rating: "4.5 ★",
+        eta: "20–25 mins",
+        items: [
+          { id: "tj-1", name: "Paneer Tikka Roll", desc: "Soft paratha with roasted paneer and mint chutney.", price: 95 },
+          { id: "tj-2", name: "Soya Chaap Roll", desc: "Spiced chaap roll with onions and green chutney.", price: 100 }
+        ]
+      },
+      {
+        id: "chai-crunch",
+        name: "Chai & Crunch",
+        category: "Tea & Snacks",
+        rating: "4.8 ★",
+        eta: "15–20 mins",
+        items: [
+          { id: "cc-1", name: "Masala Chai + Samosa (2 pcs)", desc: "Hot spiced tea with two crispy samosas.", price: 60 },
+          { id: "cc-2", name: "Bread Pakora Plate (2 pcs)", desc: "Stuffed potato bread pakoras with chutney.", price: 50 }
+        ]
+      }
+    ];
+
+    function loadShops() {
+      let extra = [];
+      try {
+        const raw = JSON.parse(localStorage.getItem(DB.MERCHANT) || "[]");
+        if (Array.isArray(raw)) {
+          extra = raw.map((s, idx) => ({
+            id: s.id || `shop-${idx}`,
+            name: s.name || "Partner Shop",
+            category: s.category || "Partner",
+            rating: s.rating || "4.5 ★",
+            eta: s.eta || "25–30 mins",
+            items: Array.isArray(s.items) ? s.items : (Array.isArray(s.menu) ? s.menu : [])
+          }));
+        }
+      } catch (_) {}
+
+      const map = new Map();
+      baseList.forEach(s => map.set(s.id, s));
+      extra.forEach(s => map.set(s.id, s));
+      return Array.from(map.values());
+    }
+
+    let shops = loadShops();
+    let curShop = shops[0] ? shops[0].id : "ALL";
+    let cart = {};
+    let user = JSON.parse(localStorage.getItem(DB.USER) || "null");
+    let recMode = localStorage.getItem(DB.MODE) || "self";
+    le
