@@ -38,8 +38,8 @@
       min-height: 100vh;
     }
 
-    /* Step 1: Customer Details Screen */
-    .onboarding-wrap {
+    /* Step 1 Screen */
+    #step1Screen {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -47,7 +47,7 @@
       padding: 20px 16px;
     }
 
-    .onboarding-card {
+    .card-box {
       width: 100%;
       max-width: 470px;
       background: var(--card);
@@ -57,7 +57,7 @@
       box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.1);
     }
 
-    .brand-header {
+    .brand-row {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -66,12 +66,11 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .logo-badge {
+    .brand-icon {
       width: 44px;
       height: 44px;
       border-radius: 13px;
       background: var(--primary);
-      color: #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -81,53 +80,52 @@
     .brand-name {
       font-size: 20px;
       font-weight: 800;
-      letter-spacing: -0.3px;
       line-height: 1.15;
     }
 
-    .brand-tagline {
+    .brand-sub {
       font-size: 12px;
       color: var(--muted);
     }
 
-    .step-title {
+    .heading-1 {
       font-size: 17px;
       font-weight: 800;
       margin-bottom: 4px;
     }
 
-    .step-desc {
+    .subtext {
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .form-stack {
+    .stack {
       display: flex;
       flex-direction: column;
       gap: 11px;
     }
 
-    .two-col {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .field-label {
+    .label {
+      display: block;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.4px;
       color: var(--muted);
       margin-bottom: 4px;
-      display: block;
     }
 
-    .loc-row-input {
-      display: grid;
-      grid-template-columns: 1fr auto;
+    .loc-flex {
+      display: flex;
       gap: 8px;
+      align-items: center;
     }
 
     input, textarea {
@@ -153,7 +151,6 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: 0.2s;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -162,7 +159,7 @@
     }
 
     .btn-sm {
-      padding: 8px 12px;
+      padding: 9px 12px;
       font-size: 12px;
       border-radius: 10px;
     }
@@ -182,60 +179,57 @@
       border: 1px solid var(--primary);
     }
 
-    .btn-outline:hover {
-      background: var(--soft);
-    }
-
-    .error-banner {
+    .msg-box {
       margin-top: 10px;
       padding: 10px 12px;
       border-radius: 10px;
-      background: var(--danger-bg);
-      color: var(--danger-text);
-      border: 1px solid var(--danger-border);
       font-size: 12px;
       font-weight: 600;
       display: none;
     }
 
-    .status-pill-inline {
+    .msg-box.err {
+      display: block;
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border: 1px solid var(--danger-border);
+    }
+
+    .msg-box.ok {
+      display: block;
+      background: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid var(--success-border);
+    }
+
+    .helper-link-btn {
       margin-top: 6px;
-      font-size: 11px;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 12px;
       font-weight: 700;
-      line-height: 1.4;
+      text-decoration: underline;
+      cursor: pointer;
       display: none;
     }
 
-    .status-pill-inline.ok {
-      color: var(--success-text);
-      display: block;
-    }
-
-    .status-pill-inline.err {
-      color: var(--danger-text);
-      display: block;
-    }
-
-    /* Step 2: Main App Screen */
-    .app-shell {
+    /* Step 2 Screen */
+    #step2Screen {
       display: none;
       padding-bottom: 105px;
     }
 
-    .app-shell.active {
-      display: block;
-    }
-
-    .top-bar {
+    .app-header {
       position: sticky;
       top: 0;
       z-index: 25;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.97);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
-    .top-bar-inner {
+    .app-header-inner {
       max-width: 960px;
       margin: 0 auto;
       padding: 10px 16px;
@@ -244,18 +238,11 @@
       gap: 8px;
     }
 
-    .top-row {
+    .top-bar-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-    }
-
-    .mini-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
     }
 
     .mini-logo {
@@ -263,13 +250,14 @@
       height: 34px;
       border-radius: 10px;
       background: var(--primary);
-      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
     }
 
-    .loc-header-btn {
+    .loc-pill-btn {
       flex: 1;
       min-width: 0;
       background: var(--bg);
@@ -284,16 +272,15 @@
       text-align: left;
     }
 
-    .loc-main {
+    .loc-title {
       font-size: 12px;
       font-weight: 800;
-      color: var(--text);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .loc-sub {
+    .loc-addr {
       font-size: 11px;
       color: var(--muted);
       white-space: nowrap;
@@ -301,14 +288,7 @@
       text-overflow: ellipsis;
     }
 
-    .edit-tag {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    .recipient-strip {
+    .mode-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -318,7 +298,7 @@
       color: var(--muted);
     }
 
-    .seg-control {
+    .switch-pill {
       display: inline-flex;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -326,7 +306,7 @@
       padding: 2px;
     }
 
-    .seg-btn {
+    .switch-btn {
       border: none;
       background: transparent;
       color: var(--muted);
@@ -337,22 +317,22 @@
       cursor: pointer;
     }
 
-    .seg-btn.active {
+    .switch-btn.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .receiver-inputs {
+    .receiver-row {
       display: none;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
 
-    .receiver-inputs.open {
+    .receiver-row.show {
       display: grid;
     }
 
-    .content-wrap {
+    .app-body {
       max-width: 960px;
       margin: 16px auto 0;
       padding: 0 16px;
@@ -361,7 +341,7 @@
       gap: 18px;
     }
 
-    .panel {
+    .section-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -369,11 +349,7 @@
       scroll-margin-top: 135px;
     }
 
-    .panel.pulse {
-      box-shadow: 0 0 0 2px var(--primary);
-    }
-
-    .panel-head {
+    .section-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -382,25 +358,18 @@
       flex-wrap: wrap;
     }
 
-    .panel-title {
+    .section-heading {
       font-size: 16px;
       font-weight: 800;
-      letter-spacing: -0.2px;
     }
 
-    .panel-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* Shops & Menu */
-    .shops-grid {
+    .shops-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 12px;
     }
 
-    .shop-tile {
+    .shop-box {
       background: #FCFBF9;
       border: 1.5px solid var(--border);
       border-radius: 14px;
@@ -410,54 +379,14 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 7px;
-      transition: 0.2s;
     }
 
-    .shop-tile:hover, .shop-tile.selected {
+    .shop-box.active {
       background: var(--soft);
       border-color: var(--primary);
     }
 
-    .tile-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tile-cat {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: #fff;
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 2px 8px;
-      border-radius: 999px;
-    }
-
-    .tile-rating {
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .tile-name {
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .tile-meta {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .tile-cta {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .menu-grid {
+    .menu-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
       gap: 12px;
@@ -466,7 +395,7 @@
       border-top: 1px solid var(--border);
     }
 
-    .dish-card {
+    .food-box {
       background: #FCFBF9;
       border: 1px solid var(--border);
       border-radius: 13px;
@@ -477,26 +406,7 @@
       gap: 10px;
     }
 
-    .dish-shop {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--primary);
-    }
-
-    .dish-name {
-      font-size: 15px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .dish-desc {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 3px;
-    }
-
-    .dish-foot {
+    .food-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -504,13 +414,7 @@
       border-top: 1px solid var(--border);
     }
 
-    .dish-price {
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    /* Cart */
-    .cart-item-row {
+    .cart-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -519,7 +423,7 @@
       font-size: 13px;
     }
 
-    .qty-ctrl {
+    .qty-wrap {
       display: flex;
       align-items: center;
       gap: 7px;
@@ -536,7 +440,7 @@
       cursor: pointer;
     }
 
-    .summary-line {
+    .total-row {
       display: flex;
       justify-content: space-between;
       font-size: 17px;
@@ -544,21 +448,8 @@
       margin: 14px 0;
     }
 
-    .order-confirm {
-      margin-top: 12px;
-      padding: 11px 13px;
-      border-radius: 11px;
-      background: var(--success-bg);
-      color: var(--success-text);
-      border: 1px solid var(--success-border);
-      font-size: 12px;
-      font-weight: 600;
-      display: none;
-    }
-
-    /* Help Chat */
-    .chat-list {
-      max-height: 210px;
+    .chat-area {
+      max-height: 200px;
       overflow-y: auto;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -570,34 +461,17 @@
       gap: 8px;
     }
 
-    .bubble {
+    .chat-msg {
       max-width: 84%;
       padding: 8px 12px;
       border-radius: 12px;
       font-size: 12px;
-    }
-
-    .bubble.out {
       align-self: flex-end;
       background: var(--primary);
       color: #fff;
     }
 
-    .bubble.in {
-      align-self: flex-start;
-      background: var(--soft);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .bubble-meta {
-      font-size: 10px;
-      opacity: 0.75;
-      margin-top: 2px;
-    }
-
-    /* Floating Bottom Bar */
-    .floating-nav-wrap {
+    .bottom-dock-wrap {
       position: fixed;
       bottom: 14px;
       left: 0;
@@ -609,7 +483,7 @@
       pointer-events: none;
     }
 
-    .floating-nav {
+    .bottom-dock {
       pointer-events: auto;
       width: 100%;
       max-width: 420px;
@@ -619,13 +493,12 @@
       border-radius: 999px;
       padding: 6px 10px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 6px;
       box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.18);
     }
 
-    .nav-tab {
+    .dock-btn {
       flex: 1;
       border: none;
       background: transparent;
@@ -642,12 +515,12 @@
       position: relative;
     }
 
-    .nav-tab.active {
+    .dock-btn.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .nav-badge {
+    .dock-badge {
       position: absolute;
       top: 2px;
       right: 13px;
@@ -665,15 +538,18 @@
       justify-content: center;
     }
 
-    .nav-tab.active .nav-badge {
+    .dock-btn.active .dock-badge {
       background: #fff;
       color: var(--primary);
       border-color: var(--primary);
     }
 
     @media (max-width: 600px) {
-      .two-col, .loc-row-input, .receiver-inputs, .shops-grid, .menu-grid {
+      .grid-2, .loc-flex, .receiver-row, .shops-list, .menu-list {
         grid-template-columns: 1fr;
+      }
+      .loc-flex {
+        display: grid;
       }
     }
   </style>
@@ -681,144 +557,218 @@
 <body>
 
   <!-- Step 1: Customer Details Screen -->
-  <div class="onboarding-wrap" id="onboardingScreen">
-    <div class="onboarding-card">
-      <div class="brand-header">
-        <div class="logo-badge" aria-hidden="true">
+  <div id="step1Screen">
+    <div class="card-box">
+      <div class="brand-row">
+        <div class="brand-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
           </svg>
         </div>
         <div>
           <div class="brand-name">KhanaGo</div>
-          <div class="brand-tagline">Fast &amp; fresh food delivery</div>
+          <div class="brand-sub">Fast &amp; fresh food delivery</div>
         </div>
       </div>
 
-      <h1 class="step-title">Complete Your Delivery Details</h1>
-      <p class="step-desc">Enter your name, phone number, address, landmark, state, pincode, and allow location to open the app.</p>
+      <h1 class="heading-1">Customer Delivery Details</h1>
+      <p class="subtext">Fill in your details and location to open the app.</p>
 
-      <form class="form-stack" id="onboardingForm" onsubmit="saveCustomerProfile(event)">
+      <div class="stack">
         <div>
-          <label class="field-label" for="onboardName">Full Name</label>
-          <input type="text" id="onboardName" placeholder="Enter your full name" />
+          <label class="label" for="inpName">Full Name</label>
+          <input type="text" id="inpName" placeholder="Enter your name" />
         </div>
 
         <div>
-          <label class="field-label" for="onboardPhone">Phone Number</label>
-          <input type="tel" id="onboardPhone" placeholder="Enter mobile number" />
+          <label class="label" for="inpPhone">Phone Number</label>
+          <input type="tel" id="inpPhone" placeholder="Enter mobile number" />
         </div>
 
         <div>
-          <label class="field-label" for="onboardAddress">Full Address</label>
-          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, locality"></textarea>
+          <label class="label" for="inpAddress">Full Address</label>
+          <textarea id="inpAddress" rows="2" placeholder="House / flat no., street, area"></textarea>
         </div>
 
         <div>
-          <label class="field-label" for="onboardLandmark">Landmark</label>
-          <input type="text" id="onboardLandmark" placeholder="Nearby landmark (e.g., near temple, chowk)" />
+          <label class="label" for="inpLandmark">Landmark</label>
+          <input type="text" id="inpLandmark" placeholder="Nearby landmark" />
         </div>
 
-        <div class="two-col">
+        <div class="grid-2">
           <div>
-            <label class="field-label" for="onboardState">State</label>
-            <input type="text" id="onboardState" placeholder="Enter state" />
+            <label class="label" for="inpState">State</label>
+            <input type="text" id="inpState" placeholder="State" />
           </div>
 
           <div>
-            <label class="field-label" for="onboardPincode">Pincode</label>
-            <input type="text" id="onboardPincode" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" />
+            <label class="label" for="inpPincode">Pincode</label>
+            <input type="text" id="inpPincode" inputmode="numeric" maxlength="6" placeholder="Pincode" />
           </div>
         </div>
 
         <div>
-          <label class="field-label" for="onboardLocation">Current Location</label>
-          <div class="loc-row-input">
-            <input type="text" id="onboardLocation" placeholder="Tap Use Location and allow permission" />
-            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="requestLocationPermission()">Use Location</button>
+          <label class="label" for="inpLocation">Location</label>
+          <div class="loc-flex">
+            <input type="text" id="inpLocation" placeholder="Tap Use Location or type location" />
+            <button type="button" class="btn btn-outline btn-sm" id="btnUseLoc" onclick="onUseLocationTap()">Use Location</button>
           </div>
-          <div class="status-pill-inline" id="gpsStatusText"></div>
+          <button type="button" class="helper-link-btn" id="btnFillFromAddress" onclick="fillLocationFromAddress()">
+            Use typed address &amp; state as location
+          </button>
+          <div class="msg-box" id="locStatusBox"></div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 4px;">
+        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 4px;" onclick="onContinueTap()">
           Continue to KhanaGo
         </button>
-      </form>
-
-      <div class="error-banner" id="onboardingError">
-        Please fill in your name, phone number, full address, landmark, state, pincode, and location.
       </div>
+
+      <div class="msg-box" id="step1ErrorBox"></div>
     </div>
   </div>
 
   <!-- Step 2: Main App Screen -->
-  <div class="app-shell" id="appShell">
-    <header class="top-bar">
-      <div class="top-bar-inner">
-        <div class="top-row">
-          <div class="mini-brand" onclick="navigateApp('home')" style="cursor:pointer;">
-            <div class="mini-logo" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
-              </svg>
-            </div>
+  <div id="step2Screen">
+    <header class="app-header">
+      <div class="app-header-inner">
+        <div class="top-bar-row">
+          <div class="mini-logo" onclick="switchTab('home')" title="Home">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
+            </svg>
           </div>
 
-          <button type="button" class="loc-header-btn" onclick="openOnboardingEditor()">
+          <button type="button" class="loc-pill-btn" onclick="openStep1()">
             <div style="min-width: 0;">
-              <div class="loc-main" id="barLocationTitle">📍 Location</div>
-              <div class="loc-sub" id="barAddressSub">Full address, landmark, state &amp; pincode</div>
+              <div class="loc-title" id="hdrLocText">📍 Location</div>
+              <div class="loc-addr" id="hdrAddrText">Address details</div>
             </div>
-            <span class="edit-tag">Edit</span>
+            <span style="font-size: 11px; font-weight: 700; color: var(--primary);">Edit</span>
           </button>
 
-          <button type="button" class="btn btn-outline btn-sm" onclick="navigateApp('help')">Help</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="switchTab('help')">Help</button>
         </div>
 
-        <div class="recipient-strip">
-          <span>Delivering: <strong id="recipientSummary">Self</strong></span>
-          <div class="seg-control">
-            <button type="button" class="seg-btn active" id="segSelf" onclick="switchRecipient('self')">Self</button>
-            <button type="button" class="seg-btn" id="segReceiver" onclick="switchRecipient('receiver')">Receiver</button>
+        <div class="mode-bar">
+          <span>Delivering to: <strong id="hdrRecipient">Self</strong></span>
+          <div class="switch-pill">
+            <button type="button" class="switch-btn active" id="btnSelf" onclick="setRecipientMode('self')">Self</button>
+            <button type="button" class="switch-btn" id="btnReceiver" onclick="setRecipientMode('receiver')">Receiver</button>
           </div>
         </div>
 
-        <div class="receiver-inputs" id="receiverBox">
-          <input type="text" id="recName" placeholder="Receiver full name" oninput="saveReceiver()" />
-          <input type="text" id="recPhone" placeholder="Receiver phone / landmark note" oninput="saveReceiver()" />
+        <div class="receiver-row" id="receiverInputs">
+          <input type="text" id="inpRecName" placeholder="Receiver full name" oninput="saveReceiverInfo()" />
+          <input type="text" id="inpRecPhone" placeholder="Receiver phone / note" oninput="saveReceiverInfo()" />
         </div>
       </div>
     </header>
 
-    <main class="content-wrap">
-      <!-- Shops & Selected Shop Menu -->
-      <section class="panel" id="sec-shops">
-        <div class="panel-head">
+    <main class="app-body">
+      <!-- Shops & Menu Below -->
+      <section class="section-card" id="boxShops">
+        <div class="section-top">
           <div>
-            <h2 class="panel-title">Shops</h2>
-            <p class="panel-sub">Tap any shop to view its menu below.</p>
+            <h2 class="section-heading">Shops</h2>
+            <p class="brand-sub">Tap any shop to see its menu below.</p>
           </div>
-          <button type="button" class="btn btn-outline btn-sm" onclick="showAllItems()">All Menus</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="selectShop('ALL')">All Menus</button>
         </div>
 
-        <div class="shops-grid" id="shopsGrid"></div>
+        <div class="shops-list" id="shopsContainer"></div>
 
         <div>
-          <div class="panel-head" style="margin-top: 16px; margin-bottom: 0;">
+          <div class="section-top" style="margin-top: 16px; margin-bottom: 0;">
             <div>
-              <h3 class="panel-title" id="activeMenuTitle" style="font-size: 15px;">Menu</h3>
-              <p class="panel-sub" id="activeMenuSub">Tap a shop above</p>
+              <h3 class="section-heading" id="menuTitle" style="font-size: 15px;">Menu</h3>
+              <p class="brand-sub" id="menuSub">Select a shop above</p>
             </div>
           </div>
-          <div class="menu-grid" id="menuGrid"></div>
+          <div class="menu-list" id="menuContainer"></div>
         </div>
       </section>
 
       <!-- Cart -->
-      <section class="panel" id="sec-cart">
-        <div class="panel-head">
-          <h2 class="panel-title">Cart</h2>
-          <span class="panel-sub" id="cartCountLabel">0 items</span>
+      <section class="section-card" id="boxCart">
+        <div class="section-top">
+          <h2 class="section-heading">Cart</h2>
+          <span class="brand-sub" id="cartCountText">0 items</span>
         </div>
 
-        <div id="cartList" 
+        <div id="cartItemsContainer" class="brand-sub">Your cart is empty.</div>
+
+        <div class="total-row">
+          <span>Total Payable</span>
+          <span id="cartTotalText">₹0</span>
+        </div>
+
+        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="confirmOrder()">
+          Place Order
+        </button>
+
+        <div class="msg-box" id="orderStatusBox"></div>
+      </section>
+
+      <!-- Help Chat -->
+      <section class="section-card" id="boxHelp">
+        <div class="section-top">
+          <div>
+            <h2 class="section-heading">Help</h2>
+            <p class="brand-sub">Send a message for support.</p>
+          </div>
+        </div>
+
+        <div class="chat-area" id="chatContainer"></div>
+
+        <div class="loc-flex">
+          <input type="text" id="inpChat" placeholder="Write your message..." onkeydown="if(event.key==='Enter') sendChat()" />
+          <button type="button" class="btn btn-primary" onclick="sendChat()">Send</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Bottom Navigation Bar -->
+    <div class="bottom-dock-wrap">
+      <nav class="bottom-dock" aria-label="Bottom Navigation">
+        <button type="button" class="dock-btn active" id="dock-home" onclick="switchTab('home')">
+          <span>🏠</span>
+          <span>Home</span>
+        </button>
+        <button type="button" class="dock-btn" id="dock-shops" onclick="switchTab('shops')">
+          <span>🏪</span>
+          <span>Shops</span>
+        </button>
+        <button type="button" class="dock-btn" id="dock-cart" onclick="switchTab('cart')">
+          <span class="dock-badge" id="dockCartBadge">0</span>
+          <span>🛒</span>
+          <span>Cart</span>
+        </button>
+        <button type="button" class="dock-btn" id="dock-help" onclick="switchTab('help')">
+          <span>💬</span>
+          <span>Help</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    const KEYS = {
+      USER: "khanago_user_v9",
+      MODE: "khanago_mode_v9",
+      RECEIVER: "khanago_receiver_v9",
+      CHATS: "khanago_chats_v9",
+      ORDERS: "khanago_orders_v9",
+      MERCHANT_SHOPS: "khanago_merchant_shops"
+    };
+
+    const defaultShops = [
+      {
+        id: "annapurna-kitchen",
+        name: "Annapurna Kitchen",
+        category: "Home Meals",
+        rating: "4.6 ★",
+        eta: "25–30 mins",
+        items: [
+          { id: "ak-1", name: "Classic Home Thali", desc: "4 rotis, dal tadka, seasonal sabzi, rice, and salad.", price: 120 },
+          { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 
