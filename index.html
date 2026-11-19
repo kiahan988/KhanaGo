@@ -16,6 +16,9 @@
       --muted: #666666;
       --border: #EFE4D6;
       --accent-soft: #FDECE6;
+      --success-bg: #edfcf4;
+      --success-text: #065f46;
+      --success-border: #bbf7d0;
     }
 
     * {
@@ -23,79 +26,172 @@
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding-bottom: 90px;
+      padding-bottom: 105px;
     }
 
     /* Header */
     header {
       background: var(--card);
       border-bottom: 1px solid var(--border);
-      padding: 12px 20px;
+      padding: 12px 18px;
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 25;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-top {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    /* SVG Logo Style */
     .khana-logo {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
       display: block;
     }
 
     .brand-name {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       color: var(--primary);
       letter-spacing: -0.5px;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .brand-tag {
       font-size: 11px;
       color: var(--muted);
-      margin-top: -2px;
     }
 
-    /* Location Box */
-    .location-bar {
+    .help-pill-btn {
+      background: var(--accent-soft);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .help-pill-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Top Receiver & Location Strip */
+    .top-delivery-strip {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .receiver-row {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
-      background: var(--accent-soft);
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      flex: 1;
-      max-width: 440px;
-      border: 1px solid var(--border);
+      flex-wrap: wrap;
+      font-size: 12px;
     }
 
-    .location-text {
+    .mode-switch {
+      display: inline-flex;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .receiver-fields {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #fff;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px dashed #e2cbb5;
+    }
+
+    .receiver-fields.show {
+      display: grid;
+    }
+
+    .location-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .loc-status {
       flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: 600;
-      color: #5c4a3a;
+      min-width: 180px;
+      font-weight: 700;
+      color: #4a3728;
+    }
+
+    .loc-badge-unverified {
+      color: #b91c1c;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .loc-badge-verified {
+      color: var(--success-text);
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .btn {
@@ -106,6 +202,15 @@
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 12px;
     }
 
     .btn-primary {
@@ -126,60 +231,184 @@
     /* Main Container */
     .container {
       max-width: 1000px;
-      margin: 24px auto;
+      margin: 20px auto;
       padding: 0 16px;
     }
 
     .hero {
       background: linear-gradient(135deg, #D94E28 0%, #E86A43 100%);
       color: #fff;
-      padding: 28px 24px;
+      padding: 24px 22px;
       border-radius: 18px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       box-shadow: 0 4px 12px -3px rgba(217, 78, 40, 0.3);
     }
 
     .hero h1 {
-      font-size: 26px;
+      font-size: 24px;
       margin-bottom: 6px;
       font-weight: 800;
     }
 
     .hero p {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.95;
-      max-width: 500px;
+      max-width: 520px;
+    }
+
+    /* Location Submit Box */
+    .location-submit-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 22px;
+      scroll-margin-top: 145px;
+    }
+
+    .location-submit-card.locked {
+      border-color: #f87171;
+      background: #fffafa;
+    }
+
+    .loc-form-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      scroll-margin-top: 145px;
     }
 
     .section-title {
-      font-size: 19px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #2b2b2b;
+    }
+
+    /* Shops Grid */
+    .shops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .shop-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .shop-card:hover, .shop-card.active {
+      background: var(--accent-soft);
+      border-color: var(--primary);
+    }
+
+    .shop-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .shop-badge {
+      font-size: 11px;
       font-weight: 700;
-      margin-bottom: 14px;
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .shop-rating {
+      font-size: 12px;
+      font-weight: 700;
       color: #333;
     }
 
-    /* Menu Grid */
+    .shop-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: #222;
+      margin-top: 2px;
+    }
+
+    .shop-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .shop-cta {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    /* Menu Panel */
+    .shop-menu-panel {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 24px;
+      scroll-margin-top: 145px;
+    }
+
+    .active-shop-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .active-shop-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .active-shop-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
     }
 
     .food-card {
-      background: var(--card);
+      background: #FFFDFA;
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
-      transition: box-shadow 0.2s;
-    }
-
-    .food-card:hover {
-      box-shadow: 0 6px 15px -5px rgba(0,0,0,0.08);
     }
 
     .food-rest {
@@ -201,7 +430,6 @@
       font-size: 13px;
       color: var(--muted);
       margin-top: 4px;
-      line-height: 1.4;
     }
 
     .food-footer {
@@ -219,16 +447,14 @@
       color: #111;
     }
 
-    /* Cart Panel */
-    .cart-box {
+    /* Cart & Help Panels */
+    .cart-box, .help-box {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 16px;
       padding: 20px;
-      position: sticky;
-      bottom: 16px;
-      margin-top: auto;
-      box-shadow: 0 10px 25px -10px rgba(0,0,0,0.15);
+      margin-bottom: 22px;
+      scroll-margin-top: 145px;
     }
 
     .cart-item {
@@ -258,19 +484,15 @@
       color: var(--primary);
     }
 
-    .qty-btn:active {
-      background: #fcece0;
-    }
-
     .input-group {
-      margin-top: 16px;
+      margin-top: 14px;
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     input {
       width: 100%;
-      padding: 12px;
+      padding: 11px 12px;
       border-radius: 10px;
       border: 1px solid #d8c8b8;
       background: #fdfaf7;
@@ -287,7 +509,7 @@
       justify-content: space-between;
       font-size: 19px;
       font-weight: 800;
-      margin: 18px 0;
+      margin: 16px 0;
       color: #111;
     }
 
@@ -295,62 +517,253 @@
       margin-top: 14px;
       padding: 14px;
       border-radius: 12px;
-      background: #edfcf4;
-      color: #065f46;
-      font-size: 14px;
-      font-weight: 500;
+      background: var(--success-bg);
+      color: var(--success-text);
+      font-size: 13px;
       display: none;
-      border: 1px solid #bbf7d0;
+      border: 1px solid var(--success-border);
+    }
+
+    .warn-msg {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #fef2f2;
+      color: #991b1b;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid #fecaca;
+      display: none;
+    }
+
+    /* Help Chat Thread */
+    .chat-thread {
+      max-height: 250px;
+      overflow-y: auto;
+      background: #fdfaf7;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-bubble {
+      max-width: 85%;
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .chat-bubble.support {
+      align-self: flex-start;
+      background: var(--accent-soft);
+      color: #3d2c1e;
+      border: 1px solid var(--border);
+    }
+
+    .chat-meta {
+      font-size: 10px;
+      opacity: 0.75;
+      margin-top: 3px;
+    }
+
+    /* Floating Bottom Bar */
+    .bottom-nav-wrap {
+      position: fixed;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 14px;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .bottom-nav {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 460px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-item {
+      flex: 1;
+      border: none;
+      background: transparent;
+      border-radius: 999px;
+      padding: 7px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .nav-item .nav-icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .nav-item.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: 3px;
+      right: 14px;
+      background: var(--primary);
+      color: #fff;
+      border: 2px solid #fff;
+      font-size: 10px;
+      font-weight: 800;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    .nav-item.active .nav-badge {
+      background: #fff;
+      color: var(--primary);
+      border-color: var(--primary);
     }
 
     @media (max-width: 600px) {
-      header { padding: 10px 16px; }
-      .location-bar { max-width: 100%; order: 2; margin-top: 10px; }
-      .brand { order: 1; }
-      .menu-grid { grid-template-columns: 1fr; }
+      .receiver-fields, .loc-form-grid { grid-template-columns: 1fr; }
+      .shops-grid, .menu-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body id="topSection">
 
   <header>
-    <div class="brand">
-      <!-- SVG Logo Embedded -->
-      <svg class="khana-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="KhanaGo Logo">
-        <rect width="42" height="42" rx="12" fill="#D94E28"/>
-        <path d="M13 12V21M16 12V21M13 16.5H16M14.5 16.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M25 12C27.5 12 29 14.2 29 17.5C29 20.2 27.5 22 25.5 22.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M21 26H31M28 23.5L31 26L28 28.5" stroke="#FDECE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div>
-        <div class="brand-name">KhanaGo</div>
-        <div class="brand-tag">Garma-garam khana, aapke dwaar</div>
+    <div class="header-top">
+      <div class="brand">
+        <svg class="khana-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="KhanaGo Logo">
+          <rect width="42" height="42" rx="12" fill="#D94E28"/>
+          <path d="M13 12V21M16 12V21M13 16.5H16M14.5 16.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 12C27.5 12 29 14.2 29 17.5C29 20.2 27.5 22 25.5 22.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 26H31M28 23.5L31 26L28 28.5" stroke="#FDECE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="brand-name">KhanaGo</div>
+          <div class="brand-tag">Garma-garam khana, aapke dwaar</div>
+        </div>
       </div>
+
+      <button type="button" class="help-pill-btn" onclick="handleBottomNav('help')">Help</button>
     </div>
 
-    <div class="location-bar">
-      <span>📍</span>
-      <span class="location-text" id="locationDisplay">Location set karein...</span>
-      <button class="btn btn-primary" onclick="detectLocation()">Detect Location</button>
+    <!-- Top Receiver Option & Mandatory Location Status -->
+    <div class="top-delivery-strip">
+      <div class="receiver-row">
+        <div>
+          <strong>Delivery:</strong>
+          <span id="modeSummaryText">Apna Saved Address</span>
+        </div>
+        <div class="mode-switch">
+          <button type="button" class="mode-btn active" id="modeSelfBtn" onclick="setDeliveryMode('self')">Apne Liye</button>
+          <button type="button" class="mode-btn" id="modeReceiverBtn" onclick="setDeliveryMode('receiver')">Kisi Aur Ko Bhejein</button>
+        </div>
+      </div>
+
+      <!-- Receiver Inputs (Visible when Kisi Aur Ko Bhejein is selected) -->
+      <div class="receiver-fields" id="receiverFields">
+        <input type="text" id="receiverNameInput" placeholder="Receiver ka naam likhein" oninput="saveReceiverInfo()" />
+        <input type="text" id="receiverPhoneOrNote" placeholder="Receiver mobile / delivery note" oninput="saveReceiverInfo()" />
+      </div>
+
+      <div class="location-row">
+        <div class="loc-status" id="topLocationText">📍 Location submit nahi hui hai (Order ke liye zaroori)</div>
+        <span class="loc-badge-unverified" id="locationStatusBadge">Location Required</span>
+        <button type="button" class="btn btn-primary btn-sm" onclick="focusLocationCard()">Location Set / Edit</button>
+      </div>
     </div>
   </header>
 
   <div class="container">
     <div class="hero">
       <h1>Bhookh lagi hai? KhanaGo haazir hai!</h1>
-      <p>Apne aas-paas ke best kitchens se fresh meals aur snacks turant order karein.</p>
+      <p>Pehle apni location submit karein, phir kisi bhi shop par tap karke uska menu dekhein aur order karein.</p>
     </div>
 
-    <h2 class="section-title">Aaj ka Popular Menu</h2>
-    <div class="menu-grid" id="menuGrid"></div>
+    <!-- Mandatory Location Submission Card -->
+    <div class="location-submit-card locked" id="locationSubmitCard">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+        <h2 class="section-title">1. Delivery Location Submit Karein (Zaroori)</h2>
+        <button type="button" class="btn btn-outline btn-sm" onclick="detectLocation()">📡 GPS Detect</button>
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
+        Bina location submit kiye order place nahi hoga. Ek baar address submit karne par wo save ho jayega.
+      </p>
 
-    <div class="cart-box">
-      <h2 class="section-title">Aapka Order Cart</h2>
+      <div class="loc-form-grid">
+        <input type="text" id="savedAddressInput" placeholder="Apna poora delivery address / house no. / area likhein" />
+        <button type="button" class="btn btn-primary" onclick="submitAndSaveLocation()">Location Submit Karein</button>
+      </div>
+
+      <div class="warn-msg" id="locationWarning">
+        ⚠️ Kripya order karne se pehle apna address/location likh kar "Location Submit Karein" dabayein.
+      </div>
+      <div class="order-msg" id="locationSavedNotice" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- Shops Section -->
+    <div class="section-header" id="shopsSectionHeader">
+      <h2 class="section-title">2. Aas-Paas Ki Shops</h2>
+      <span style="font-size: 12px; color: var(--muted);">Kisi shop par tap karke menu dekhein</span>
+    </div>
+    <div class="shops-grid" id="shopsGrid"></div>
+
+    <!-- Selected Shop's Menu Directly Below Shops -->
+    <div class="shop-menu-panel" id="shopMenuSection">
+      <div class="active-shop-banner">
+        <div>
+          <div class="active-shop-title" id="activeShopTitle">Shop Menu</div>
+          <div class="active-shop-sub" id="activeShopSub">Kisi bhi item ko cart mein jodein</div>
+        </div>
+        <button type="button" class="btn btn-outline" onclick="selectAllShops()">Sabhi Shops Ka Menu</button>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+
+    <!-- Order Cart -->
+    <div class="cart-box" id="cartSection">
+      <h2 class="section-title" style="margin-bottom: 10px;">Aapka Order Cart</h2>
       <div id="cartItems" style="color: #777; font-style: italic; padding: 8px 0;">Cart abhi khaali hai. Upar se koi item add karein.</div>
 
-      <div class="input-group">
-        <input type="text" id="customerName" placeholder="Aapka naam likhein" />
-        <input type="text" id="customerAddress" placeholder="Delivery address / landmark likhein" />
+      <div class="input-group" id="checkoutForm">
+        <input type="text" id="customerName" placeholder="Aapka naam likhein" oninput="saveCustomerName()" />
+        <input type="text" id="orderDeliveryAddressDisplay" placeholder="Saved location apne aap yahan aayegi" readonly />
       </div>
 
       <div class="total-row">
@@ -358,27 +771,355 @@
         <span id="cartTotal">₹0</span>
       </div>
 
-      <button class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 12px;" onclick="placeOrder()">
+      <button type="button" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 12px;" onclick="placeOrder()">
         Order Place Karein
       </button>
 
       <div class="order-msg" id="orderConfirmation"></div>
     </div>
+
+    <!-- Help Chat Section (Chat Only, No Number, No Dashboard Here) -->
+    <div class="help-box" id="helpSection">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+        <h2 class="section-title">Help</h2>
+        <span style="font-size:11px; font-weight:700; color:var(--primary); background:var(--accent-soft); padding:4px 10px; border-radius:999px;">Help Chat</span>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">
+        Order ya delivery se judi kisi bhi madad ke liye yahan chat par message bhejein.
+      </p>
+
+      <div class="chat-thread" id="helpChatThread"></div>
+
+      <div class="loc-form-grid">
+        <input type="text" id="helpChatInput" placeholder="Apna message yahan likhein..." />
+        <button type="button" class="btn btn-primary" onclick="sendHelpChat()">Bhejein</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating App-Style Bottom Navigation Bar -->
+  <div class="bottom-nav-wrap">
+    <nav class="bottom-nav" aria-label="Bottom Navigation">
+      <button type="button" class="nav-item active" id="nav-home" onclick="handleBottomNav('home')">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-shops" onclick="handleBottomNav('shops')">
+        <span class="nav-icon">🏪</span>
+        <span>Shops</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-cart" onclick="handleBottomNav('cart')">
+        <span class="nav-badge" id="navCartBadge">0</span>
+        <span class="nav-icon">🛒</span>
+        <span>Cart</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-help" onclick="handleBottomNav('help')">
+        <span class="nav-icon">💬</span>
+        <span>Help</span>
+      </button>
+    </nav>
   </div>
 
   <script>
-    const menuData = [
-      { id: 1, name: "Ghar jaisi Thali", restaurant: "Annapurna Kitchen", desc: "4 roti, dal tadka, seasonal sabzi, chawal aur salad.", price: 120 },
-      { id: 2, name: "Paneer Tikka Roll", restaurant: "Tandoor Junction", desc: "Soft paratha mein roasted paneer, pyaaz aur mint chutney.", price: 90 },
-      { id: 3, name: "Masala Kulhad Chai + Samosa (2 pcs)", restaurant: "Chai & Crunch", desc: "Adrak wali garam chai aur crispy aloo samosa.", price: 60 },
-      { id: 4, name: "Veg Biryani Bowl", restaurant: "Aroma Handi", desc: "Khushbudar basmati rice, mixed veggies aur raita.", price: 140 }
+    const STORAGE_KEYS = {
+      LOCATION: "khanago_submitted_location_v1",
+      NAME: "khanago_customer_name_v1",
+      MODE: "khanago_delivery_mode_v1",
+      RECEIVER: "khanago_receiver_info_v1",
+      CHATS: "khanago_support_chats_v1",
+      ORDERS: "khanago_orders_v1"
+    };
+
+    const shopsData = [
+      {
+        id: "annapurna",
+        name: "Annapurna Kitchen",
+        category: "Ghar Ka Khana",
+        rating: "4.6 ★",
+        deliveryTime: "25–30 min",
+        menu: [
+          { id: 101, name: "Ghar jaisi Thali", desc: "4 roti, dal tadka, seasonal sabzi, chawal aur salad.", price: 120 },
+          { id: 102, name: "Special Dal Chawal Combo", desc: "Desi ghee tadka dal, steamed rice aur pyaaz-nimbu.", price: 85 }
+        ]
+      },
+      {
+        id: "tandoor",
+        name: "Tandoor Junction",
+        category: "Rolls & Snacks",
+        rating: "4.5 ★",
+        deliveryTime: "20–30 min",
+        menu: [
+          { id: 201, name: "Paneer Tikka Roll", desc: "Soft paratha mein roasted paneer, pyaaz aur mint chutney.", price: 90 },
+          { id: 202, name: "Masala Chaap Roll", desc: "Chatpata soya chaap roll green chutney ke saath.", price: 100 }
+        ]
+      },
+      {
+        id: "chai",
+        name: "Chai & Crunch",
+        category: "Chai & Nashta",
+        rating: "4.8 ★",
+        deliveryTime: "15–20 min",
+        menu: [
+          { id: 301, name: "Masala Kulhad Chai + Samosa (2 pcs)", desc: "Adrak wali garam chai aur crispy aloo samosa.", price: 60 },
+          { id: 302, name: "Bread Pakora Plate (2 pcs)", desc: "Stuffed aloo bread pakora hari chutney ke saath.", price: 50 }
+        ]
+      },
+      {
+        id: "aroma",
+        name: "Aroma Handi",
+        category: "Biryani & Meals",
+        rating: "4.4 ★",
+        deliveryTime: "30–35 min",
+        menu: [
+          { id: 401, name: "Veg Biryani Bowl", desc: "Khushbudar basmati rice, mixed veggies aur raita.", price: 140 },
+          { id: 402, name: "Paneer Dum Biryani", desc: "Shahi spices aur soft paneer pieces ke saath dum biryani.", price: 165 }
+        ]
+      }
     ];
 
+    let selectedShopId = shopsData[0].id;
     let cart = {};
+    let submittedLocation = localStorage.getItem(STORAGE_KEYS.LOCATION) || "";
+    let deliveryMode = localStorage.getItem(STORAGE_KEYS.MODE) || "self";
+    let receiverInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.RECEIVER) || '{"name":"","note":""}');
+    let helpChats = JSON.parse(localStorage.getItem(STORAGE_KEYS.CHATS) || "[]");
+    let ordersList = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS) || "[]");
+
+    function initSavedData() {
+      const savedName = localStorage.getItem(STORAGE_KEYS.NAME) || "";
+      document.getElementById("customerName").value = savedName;
+      document.getElementById("savedAddressInput").value = submittedLocation;
+      document.getElementById("receiverNameInput").value = receiverInfo.name || "";
+      document.getElementById("receiverPhoneOrNote").value = receiverInfo.note || "";
+      setDeliveryMode(deliveryMode, false);
+      syncLocationUI();
+      renderHelpChats();
+    }
+
+    function saveCustomerName() {
+      localStorage.setItem(STORAGE_KEYS.NAME, document.getElementById("customerName").value.trim());
+    }
+
+    function setDeliveryMode(mode, shouldSave = true) {
+      deliveryMode = mode;
+      if (shouldSave) localStorage.setItem(STORAGE_KEYS.MODE, mode);
+
+      const selfBtn = document.getElementById("modeSelfBtn");
+      const recBtn = document.getElementById("modeReceiverBtn");
+      const recFields = document.getElementById("receiverFields");
+      const modeText = document.getElementById("modeSummaryText");
+
+      if (mode === "receiver") {
+        selfBtn.classList.remove("active");
+        recBtn.classList.add("active");
+        recFields.classList.add("show");
+        modeText.innerText = "Kisi Aur Ko Bhejein (Receiver)";
+      } else {
+        recBtn.classList.remove("active");
+        selfBtn.classList.add("active");
+        recFields.classList.remove("show");
+        modeText.innerText = "Apna Saved Address";
+      }
+    }
+
+    function saveReceiverInfo() {
+      receiverInfo = {
+        name: document.getElementById("receiverNameInput").value.trim(),
+        note: document.getElementById("receiverPhoneOrNote").value.trim()
+      };
+      localStorage.setItem(STORAGE_KEYS.RECEIVER, JSON.stringify(receiverInfo));
+    }
+
+    function focusLocationCard() {
+      const card = document.getElementById("locationSubmitCard");
+      card.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("savedAddressInput").focus();
+    }
+
+    function syncLocationUI() {
+      const topText = document.getElementById("topLocationText");
+      const badge = document.getElementById("locationStatusBadge");
+      const card = document.getElementById("locationSubmitCard");
+      const warn = document.getElementById("locationWarning");
+      const notice = document.getElementById("locationSavedNotice");
+      const checkoutAddr = document.getElementById("orderDeliveryAddressDisplay");
+
+      if (submittedLocation && submittedLocation.trim().length > 0) {
+        topText.innerText = `📍 ${submittedLocation}`;
+        badge.className = "loc-badge-verified";
+        badge.innerText = "Location Saved";
+        card.classList.remove("locked");
+        warn.style.display = "none";
+        notice.style.display = "block";
+        notice.innerHTML = `✅ <strong>Location Saved:</strong> ${submittedLocation}`;
+        checkoutAddr.value = submittedLocation;
+      } else {
+        topText.innerText = "📍 Location submit nahi hui hai (Order ke liye zaroori)";
+        badge.className = "loc-badge-unverified";
+        badge.innerText = "Location Required";
+        card.classList.add("locked");
+        notice.style.display = "none";
+        checkoutAddr.value = "";
+      }
+    }
+
+    function submitAndSaveLocation() {
+      const val = document.getElementById("savedAddressInput").value.trim();
+      const warn = document.getElementById("locationWarning");
+      if (!val) {
+        warn.style.display = "block";
+        document.getElementById("savedAddressInput").focus();
+        return;
+      }
+      submittedLocation = val;
+      localStorage.setItem(STORAGE_KEYS.LOCATION, submittedLocation);
+      syncLocationUI();
+    }
+
+    async function detectLocation() {
+      const inputEl = document.getElementById("savedAddressInput");
+      if (!navigator.geolocation) {
+        alert("GPS supported nahi hai, kripya address likh kar submit karein.");
+        return;
+      }
+      inputEl.placeholder = "Location detect ho rahi hai...";
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords;
+          try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+            const data = await res.json();
+            inputEl.value = data.display_name || `Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)}`;
+          } catch (e) {
+            inputEl.value = `Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)}`;
+          }
+          submitAndSaveLocation();
+        },
+        () => {
+          alert("Location permission deny hui—kripya apna address likh kar submit karein.");
+        }
+      );
+    }
+
+    function setActiveNav(tabKey) {
+      document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("active"));
+      const target = document.getElementById(`nav-${tabKey}`);
+      if (target) target.classList.add("active");
+    }
+
+    function handleBottomNav(tabKey) {
+      setActiveNav(tabKey);
+      if (tabKey === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (tabKey === "shops") {
+        document.getElementById("shopsSectionHeader").scrollIntoView({ behavior: "smooth" });
+      } else if (tabKey === "cart") {
+        document.getElementById("cartSection").scrollIntoView({ behavior: "smooth" });
+      } else if (tabKey === "help") {
+        document.getElementById("helpSection").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function sendHelpChat() {
+      const input = document.getElementById("helpChatInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const senderName = document.getElementById("customerName").value.trim() || "Customer";
+      const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+      helpChats.push({
+        sender: senderName,
+        role: "user",
+        text,
+        time
+      });
+
+      localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(helpChats));
+      input.value = "";
+      renderHelpChats();
+    }
+
+    function renderHelpChats() {
+      const thread = document.getElementById("helpChatThread");
+      if (helpChats.length === 0) {
+        thread.innerHTML = `<div style="font-size:12px; color:var(--muted); text-align:center;">Help chat shuru karne ke liye neeche message likhein.</div>`;
+        return;
+      }
+
+      thread.innerHTML = helpChats.map(msg => `
+        <div class="chat-bubble ${msg.role}">
+          <div><strong>${msg.sender}:</strong> ${msg.text}</div>
+          <div class="chat-meta">${msg.time}</div>
+        </div>
+      `).join("");
+      thread.scrollTop = thread.scrollHeight;
+    }
+
+    function getAllMenuItems() {
+      return shopsData.flatMap(shop =>
+        shop.menu.map(item => ({
+          ...item,
+          shopId: shop.id,
+          restaurant: shop.name
+        }))
+      );
+    }
+
+    function renderShops() {
+      const grid = document.getElementById("shopsGrid");
+      grid.innerHTML = shopsData.map(shop => {
+        const isActive = selectedShopId === shop.id;
+        return `
+          <div class="shop-card ${isActive ? "active" : ""}" onclick="selectShop('${shop.id}')">
+            <div>
+              <div class="shop-top">
+                <span class="shop-badge">${shop.category}</span>
+                <span class="shop-rating">${shop.rating}</span>
+              </div>
+              <div class="shop-name">${shop.name}</div>
+              <div class="shop-meta">${shop.deliveryTime} • ${shop.menu.length} items</div>
+            </div>
+            <div class="shop-cta">${isActive ? "✓ Menu Neeche Khula Hai" : "Tap karke Menu Dekhein →"}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function selectShop(shopId) {
+      selectedShopId = shopId;
+      renderShops();
+      renderMenu();
+    }
+
+    function selectAllShops() {
+      selectedShopId = "ALL";
+      renderShops();
+      renderMenu();
+    }
 
     function renderMenu() {
       const grid = document.getElementById("menuGrid");
-      grid.innerHTML = menuData.map(item => `
+      const titleEl = document.getElementById("activeShopTitle");
+      const subEl = document.getElementById("activeShopSub");
+
+      let itemsToShow = [];
+      if (selectedShopId === "ALL") {
+        titleEl.innerText = "Sabhi Shops Ka Menu";
+        subEl.innerText = "Har shop ke popular items ek saath";
+        itemsToShow = getAllMenuItems();
+      } else {
+        const shop = shopsData.find(s => s.id === selectedShopId) || shopsData[0];
+        titleEl.innerText = `${shop.name} — Menu`;
+        subEl.innerText = `${shop.category} • Delivery: ${shop.deliveryTime} (${shop.rating})`;
+        itemsToShow = shop.menu.map(item => ({
+          ...item,
+          shopId: shop.id,
+          restaurant: shop.name
+        }));
+      }
+
+      grid.innerHTML = itemsToShow.map(item => `
         <div class="food-card">
           <div>
             <div class="food-rest">${item.restaurant}</div>
@@ -387,14 +1128,15 @@
           </div>
           <div class="food-footer">
             <span class="price">₹${item.price}</span>
-            <button class="btn btn-outline" onclick="addToCart(${item.id})">+ Add</button>
+            <button type="button" class="btn btn-outline" onclick="addToCart(${item.id})">+ Add</button>
           </div>
         </div>
       `).join("");
     }
 
     function addToCart(id) {
-      const item = menuData.find(f => f.id === id);
+      const item = getAllMenuItems().find(f => f.id === id);
+      if (!item) return;
       if (!cart[id]) {
         cart[id] = { ...item, qty: 1 };
       } else {
@@ -406,15 +1148,26 @@
     function changeQty(id, delta) {
       if (!cart[id]) return;
       cart[id].qty += delta;
-      if (cart[id].qty <= 0) {
-        delete cart[id];
-      }
+      if (cart[id].qty <= 0) delete cart[id];
       renderCart();
+    }
+
+    function updateCartBadge(items) {
+      const badge = document.getElementById("navCartBadge");
+      const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
+      if (totalQty > 0) {
+        badge.style.display = "flex";
+        badge.innerText = totalQty;
+      } else {
+        badge.style.display = "none";
+        badge.innerText = "0";
+      }
     }
 
     function renderCart() {
       const container = document.getElementById("cartItems");
       const items = Object.values(cart);
+      updateCartBadge(items);
 
       if (items.length === 0) {
         container.innerHTML = "Cart abhi khaali hai. Upar se koi item add karein.";
@@ -426,12 +1179,12 @@
         <div class="cart-item">
           <div>
             <strong>${item.name}</strong><br />
-            <small style="color: var(--muted);">₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
+            <small style="color: var(--muted);">${item.restaurant} • ₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
           </div>
           <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+            <button type="button" class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
             <span style="font-weight: 700; min-width: 20px; text-align: center;">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+            <button type="button" class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
           </div>
         </div>
       `).join("");
@@ -440,59 +1193,64 @@
       document.getElementById("cartTotal").innerText = `₹${total}`;
     }
 
-    async function detectLocation() {
-      const display = document.getElementById("locationDisplay");
-      if (!navigator.geolocation) {
-        display.innerText = "GPS supported nahi hai, address niche likhein.";
-        return;
-      }
-
-      display.innerText = "Location detect ho rahi hai...";
-      navigator.geolocation.getCurrentPosition(
-        async (pos) => {
-          const { latitude, longitude } = pos.coords;
-          try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-            const data = await res.json();
-            const area = data.address.suburb || data.address.neighbourhood || data.address.city || data.address.county || "Detected Area";
-            const city = data.address.city || data.address.state_district || data.address.state || "";
-            const fullLoc = `${area}${city ? ", " + city : ""}`;
-            display.innerText = fullLoc;
-            document.getElementById("customerAddress").value = data.display_name || fullLoc;
-          } catch (e) {
-            display.innerText = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
-            document.getElementById("customerAddress").value = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
-          }
-        },
-        () => {
-          display.innerText = "Permission deny hui—address niche likhein.";
-        }
-      );
-    }
-
     function placeOrder() {
       const items = Object.values(cart);
       const name = document.getElementById("customerName").value.trim();
-      const address = document.getElementById("customerAddress").value.trim();
+      const warn = document.getElementById("locationWarning");
       const msgBox = document.getElementById("orderConfirmation");
 
       if (items.length === 0) {
         alert("Pehle cart mein kam se kam ek item add karein.");
         return;
       }
-      if (!name || !address) {
-        alert("Kripya apna naam aur delivery address bharein.");
+
+      if (!submittedLocation || submittedLocation.trim().length === 0) {
+        warn.style.display = "block";
+        focusLocationCard();
         return;
       }
 
+      if (!name) {
+        alert("Kripya apna naam likhein.");
+        document.getElementById("customerName").focus();
+        return;
+      }
+
+      saveCustomerName();
+
+      let modeLabel = "Apne Liye";
+      if (deliveryMode === "receiver") {
+        const recName = document.getElementById("receiverNameInput").value.trim();
+        const recNote = document.getElementById("receiverPhoneOrNote").value.trim();
+        if (!recName) {
+          alert("Kripya receiver ka naam likhein.");
+          document.getElementById("receiverNameInput").focus();
+          return;
+        }
+        modeLabel = `Receiver: ${recName}${recNote ? " (" + recNote + ")" : ""}`;
+      }
+
       const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const itemsSummary = items.map(i => `${i.name} x${i.qty}`).join(", ");
+      const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+      ordersList.unshift({
+        customerName: name,
+        modeLabel,
+        address: submittedLocation,
+        total,
+        itemsSummary,
+        time
+      });
+      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(ordersList));
+
       msgBox.style.display = "block";
-      msgBox.innerHTML = `✅ <strong>Order Ready!</strong> Dhanyawad <strong>${name}</strong>, aapka ₹${total} ka order <em>(${address})</em> ke liye taiyaar hai. Agle step mein hum ise database aur Merchant/Admin dashboard se jodenge.`;
-      
-      // Scroll to message
-      msgBox.scrollIntoView({behavior: "smooth"});
+      msgBox.innerHTML = `✅ <strong>Order Confirmed!</strong> Dhanyawad <strong>${name}</strong>, aapka <strong>₹${total}</strong> ka order (<em>${modeLabel}</em>) saved location <strong>${submittedLocation}</strong> par bhejne ke liye taiyaar hai.`;
+      msgBox.scrollIntoView({ behavior: "smooth" });
     }
 
+    initSavedData();
+    renderShops();
     renderMenu();
     renderCart();
   </script>
