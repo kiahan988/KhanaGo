@@ -49,7 +49,7 @@
 
     .onboarding-card {
       width: 100%;
-      max-width: 460px;
+      max-width: 470px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -108,6 +108,12 @@
       gap: 11px;
     }
 
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
     .field-label {
       font-size: 11px;
       font-weight: 700;
@@ -152,12 +158,13 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .btn-sm {
-      padding: 7px 11px;
+      padding: 8px 12px;
       font-size: 12px;
-      border-radius: 9px;
+      border-radius: 10px;
     }
 
     .btn-primary {
@@ -195,11 +202,20 @@
       margin-top: 6px;
       font-size: 11px;
       font-weight: 700;
-      color: var(--success-text);
       display: none;
     }
 
-    /* Main App Shell (Shown Only After Customer Details & Location Submitted) */
+    .status-pill-inline.ok {
+      color: var(--success-text);
+      display: block;
+    }
+
+    .status-pill-inline.err {
+      color: var(--danger-text);
+      display: block;
+    }
+
+    /* Main App Shell */
     .app-shell {
       display: none;
       padding-bottom: 105px;
@@ -560,7 +576,7 @@
       margin-top: 2px;
     }
 
-    /* Floating Bottom Bar matching reference screenshot */
+    /* Floating Bottom Bar */
     .floating-nav-wrap {
       position: fixed;
       bottom: 14px;
@@ -636,7 +652,7 @@
     }
 
     @media (max-width: 600px) {
-      .loc-row-input, .receiver-inputs, .shops-grid, .menu-grid {
+      .two-col, .loc-row-input, .receiver-inputs, .shops-grid, .menu-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -644,7 +660,7 @@
 </head>
 <body>
 
-  <!-- Step 1: Customer Details, Number, Full Address & Location Gate -->
+  <!-- Step 1: Customer Details Gate -->
   <div class="onboarding-wrap" id="onboardingScreen">
     <div class="onboarding-card">
       <div class="brand-header">
@@ -656,7 +672,7 @@
       </div>
 
       <h1 class="step-title">Complete Your Delivery Details</h1>
-      <p class="step-desc">Enter your name, phone number, full address, and location to continue to the app.</p>
+      <p class="step-desc">Enter your name, phone number, address, landmark, state, pincode, and location to continue.</p>
 
       <form class="form-stack" onsubmit="saveCustomerProfile(event)">
         <div>
@@ -671,14 +687,31 @@
 
         <div>
           <label class="field-label" for="onboardAddress">Full Address</label>
-          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, landmark, city, pincode" required></textarea>
+          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, locality" required></textarea>
         </div>
 
         <div>
-          <label class="field-label" for="onboardLocation">Location (GPS or Pin / Area)</label>
+          <label class="field-label" for="onboardLandmark">Landmark</label>
+          <input type="text" id="onboardLandmark" placeholder="Nearby landmark (e.g., near temple, chowk)" required />
+        </div>
+
+        <div class="two-col">
+          <div>
+            <label class="field-label" for="onboardState">State</label>
+            <input type="text" id="onboardState" placeholder="Enter state" required />
+          </div>
+
+          <div>
+            <label class="field-label" for="onboardPincode">Pincode</label>
+            <input type="text" id="onboardPincode" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" required />
+          </div>
+        </div>
+
+        <div>
+          <label class="field-label" for="onboardLocation">Current Location</label>
           <div class="loc-row-input">
-            <input type="text" id="onboardLocation" placeholder="Tap Detect GPS or enter your exact location" required />
-            <button type="button" class="btn btn-outline btn-sm" onclick="detectOnboardingGPS()">Detect GPS</button>
+            <input type="text" id="onboardLocation" placeholder="Tap Use Location to get current GPS location" required />
+            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="fetchCurrentLocation()">Use Location</button>
           </div>
           <div class="status-pill-inline" id="gpsStatusText"></div>
         </div>
@@ -689,12 +722,12 @@
       </form>
 
       <div class="error-banner" id="onboardingError">
-        Please fill in your name, phone number, full address, and location to continue.
+        Please fill in all fields (name, phone, address, landmark, state, pincode, and location) to continue.
       </div>
     </div>
   </div>
 
-  <!-- Step 2: Main App View (Unlocked After Submitting Details & Location) -->
+  <!-- Step 2: Main App View -->
   <div class="app-shell" id="appShell">
     <header class="top-bar">
       <div class="top-bar-inner">
@@ -702,7 +735,7 @@
           <button type="button" class="loc-header-btn" onclick="openOnboardingEditor()">
             <div style="min-width: 0;">
               <div class="loc-main" id="barLocationTitle">📍 Location</div>
-              <div class="loc-sub" id="barAddressSub">Full address &amp; contact</div>
+              <div class="loc-sub" id="barAddressSub">Full address, landmark, state &amp; pincode</div>
             </div>
             <span class="edit-tag">Edit</span>
           </button>
@@ -720,7 +753,7 @@
 
         <div class="receiver-inputs" id="receiverBox">
           <input type="text" id="recName" placeholder="Receiver full name" oninput="saveReceiver()" />
-          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="saveReceiver()" />
+          <input type="text" id="recPhone" placeholder="Receiver phone / landmark note" oninput="saveReceiver()" />
         </div>
       </div>
     </header>
@@ -789,29 +822,4 @@
     </main>
 
     <!-- Floating Bottom Navigation Bar -->
-    <div class="floating-nav-wrap">
-      <nav class="floating-nav" aria-label="Bottom Navigation">
-        <button type="button" class="nav-tab active" id="tab-home" onclick="navigateApp('home')">
-          <span>🏠</span>
-          <span>Home</span>
-        </button>
-        <button type="button" class="nav-tab" id="tab-shops" onclick="navigateApp('shops')">
-          <span>🏪</span>
-          <span>Shops</span>
-        </button>
-        <button type="button" class="nav-tab" id="tab-cart" onclick="navigateApp('cart')">
-          <span class="nav-badge" id="navBadgeCount">0</span>
-          <span>🛒</span>
-          <span>Cart</span>
-        </button>
-        <button type="button" class="nav-tab" id="tab-help" onclick="navigateApp('help')">
-          <span>💬</span>
-          <span>Help</span>
-        </button>
-      </nav>
-    </div>
-  </div>
-
-  <script>
-    const STORE_KEYS = {
-   
+    <div class="floatin
