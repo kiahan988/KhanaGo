@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KhanaGo — Fast & Fresh Food Delivery</title>
+  <!-- Favicon - Tab Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>" type="image/svg+xml">
   <style>
     :root {
       --primary: #D94E28;
@@ -34,7 +36,7 @@
     header {
       background: var(--card);
       border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
+      padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 20;
@@ -48,19 +50,15 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .brand-badge {
-      width: 40px;
-      height: 40px;
+    /* SVG Logo Style */
+    .khana-logo {
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 20px;
+      display: block;
     }
 
     .brand-name {
@@ -68,11 +66,13 @@
       font-weight: 800;
       color: var(--primary);
       letter-spacing: -0.5px;
+      line-height: 1.2;
     }
 
     .brand-tag {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
+      margin-top: -2px;
     }
 
     /* Location Box */
@@ -86,6 +86,7 @@
       font-size: 13px;
       flex: 1;
       max-width: 440px;
+      border: 1px solid var(--border);
     }
 
     .location-text {
@@ -94,6 +95,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-weight: 600;
+      color: #5c4a3a;
     }
 
     .btn {
@@ -131,31 +133,35 @@
     .hero {
       background: linear-gradient(135deg, #D94E28 0%, #E86A43 100%);
       color: #fff;
-      padding: 24px;
+      padding: 28px 24px;
       border-radius: 18px;
       margin-bottom: 24px;
+      box-shadow: 0 4px 12px -3px rgba(217, 78, 40, 0.3);
     }
 
     .hero h1 {
       font-size: 26px;
       margin-bottom: 6px;
+      font-weight: 800;
     }
 
     .hero p {
       font-size: 14px;
       opacity: 0.95;
+      max-width: 500px;
     }
 
     .section-title {
       font-size: 19px;
       font-weight: 700;
       margin-bottom: 14px;
+      color: #333;
     }
 
     /* Menu Grid */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 16px;
       margin-bottom: 30px;
     }
@@ -169,25 +175,33 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+
+    .food-card:hover {
+      box-shadow: 0 6px 15px -5px rgba(0,0,0,0.08);
     }
 
     .food-rest {
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       color: var(--primary);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .food-name {
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 800;
       margin-top: 2px;
+      color: #222;
     }
 
     .food-desc {
       font-size: 13px;
       color: var(--muted);
       margin-top: 4px;
+      line-height: 1.4;
     }
 
     .food-footer {
@@ -195,11 +209,14 @@
       align-items: center;
       justify-content: space-between;
       margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
     }
 
     .price {
       font-size: 17px;
       font-weight: 800;
+      color: #111;
     }
 
     /* Cart Panel */
@@ -208,6 +225,10 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 20px;
+      position: sticky;
+      bottom: 16px;
+      margin-top: auto;
+      box-shadow: 0 10px 25px -10px rgba(0,0,0,0.15);
     }
 
     .cart-item {
@@ -215,7 +236,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px dashed var(--border);
+      border-bottom: 1px dashed #e0d4c7;
       font-size: 14px;
     }
 
@@ -226,45 +247,67 @@
     }
 
     .qty-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
       border: 1px solid var(--border);
-      background: var(--bg);
+      background: #fdfaf7;
       font-weight: 700;
+      font-size: 16px;
       cursor: pointer;
+      color: var(--primary);
+    }
+
+    .qty-btn:active {
+      background: #fcece0;
     }
 
     .input-group {
-      margin-top: 14px;
+      margin-top: 16px;
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     input {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
       border: 1px solid #d8c8b8;
+      background: #fdfaf7;
       font-size: 14px;
+    }
+
+    input:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
     }
 
     .total-row {
       display: flex;
       justify-content: space-between;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 800;
-      margin: 16px 0;
+      margin: 18px 0;
+      color: #111;
     }
 
     .order-msg {
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 10px;
-      background: #ecfdf5;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #edfcf4;
       color: #065f46;
       font-size: 14px;
+      font-weight: 500;
       display: none;
+      border: 1px solid #bbf7d0;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 10px 16px; }
+      .location-bar { max-width: 100%; order: 2; margin-top: 10px; }
+      .brand { order: 1; }
+      .menu-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -272,7 +315,13 @@
 
   <header>
     <div class="brand">
-      <div class="brand-badge">K</div>
+      <!-- SVG Logo Embedded -->
+      <svg class="khana-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="KhanaGo Logo">
+        <rect width="42" height="42" rx="12" fill="#D94E28"/>
+        <path d="M13 12V21M16 12V21M13 16.5H16M14.5 16.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M25 12C27.5 12 29 14.2 29 17.5C29 20.2 27.5 22 25.5 22.5V30" stroke="#FFFBF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 26H31M28 23.5L31 26L28 28.5" stroke="#FDECE6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
       <div>
         <div class="brand-name">KhanaGo</div>
         <div class="brand-tag">Garma-garam khana, aapke dwaar</div>
@@ -297,7 +346,7 @@
 
     <div class="cart-box">
       <h2 class="section-title">Aapka Order Cart</h2>
-      <div id="cartItems">Cart abhi khaali hai. Upar se koi item add karein.</div>
+      <div id="cartItems" style="color: #777; font-style: italic; padding: 8px 0;">Cart abhi khaali hai. Upar se koi item add karein.</div>
 
       <div class="input-group">
         <input type="text" id="customerName" placeholder="Aapka naam likhein" />
@@ -309,7 +358,7 @@
         <span id="cartTotal">₹0</span>
       </div>
 
-      <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;" onclick="placeOrder()">
+      <button class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 12px;" onclick="placeOrder()">
         Order Place Karein
       </button>
 
@@ -377,11 +426,11 @@
         <div class="cart-item">
           <div>
             <strong>${item.name}</strong><br />
-            <small>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
+            <small style="color: var(--muted);">₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
           </div>
           <div class="qty-controls">
             <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-            <span>${item.qty}</span>
+            <span style="font-weight: 700; min-width: 20px; text-align: center;">${item.qty}</span>
             <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
           </div>
         </div>
@@ -412,6 +461,7 @@
             document.getElementById("customerAddress").value = data.display_name || fullLoc;
           } catch (e) {
             display.innerText = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
+            document.getElementById("customerAddress").value = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
           }
         },
         () => {
@@ -438,6 +488,9 @@
       const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
       msgBox.style.display = "block";
       msgBox.innerHTML = `✅ <strong>Order Ready!</strong> Dhanyawad <strong>${name}</strong>, aapka ₹${total} ka order <em>(${address})</em> ke liye taiyaar hai. Agle step mein hum ise database aur Merchant/Admin dashboard se jodenge.`;
+      
+      // Scroll to message
+      msgBox.scrollIntoView({behavior: "smooth"});
     }
 
     renderMenu();
