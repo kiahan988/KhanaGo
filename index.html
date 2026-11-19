@@ -38,7 +38,7 @@
       min-height: 100vh;
     }
 
-    /* First Step Onboarding Gate */
+    /* Step 1: Customer Details Screen */
     .onboarding-wrap {
       min-height: 100vh;
       display: flex;
@@ -202,6 +202,7 @@
       margin-top: 6px;
       font-size: 11px;
       font-weight: 700;
+      line-height: 1.4;
       display: none;
     }
 
@@ -215,7 +216,7 @@
       display: block;
     }
 
-    /* Main App Shell */
+    /* Step 2: Main App Screen */
     .app-shell {
       display: none;
       padding-bottom: 105px;
@@ -679,7 +680,7 @@
 </head>
 <body>
 
-  <!-- Step 1: Customer Details Gate -->
+  <!-- Step 1: Customer Details Screen -->
   <div class="onboarding-wrap" id="onboardingScreen">
     <div class="onboarding-card">
       <div class="brand-header">
@@ -695,46 +696,46 @@
       </div>
 
       <h1 class="step-title">Complete Your Delivery Details</h1>
-      <p class="step-desc">Enter your name, phone number, address, landmark, state, pincode, and location to continue.</p>
+      <p class="step-desc">Enter your name, phone number, address, landmark, state, pincode, and allow location to open the app.</p>
 
-      <form class="form-stack" onsubmit="saveCustomerProfile(event)">
+      <form class="form-stack" id="onboardingForm" onsubmit="saveCustomerProfile(event)">
         <div>
           <label class="field-label" for="onboardName">Full Name</label>
-          <input type="text" id="onboardName" placeholder="Enter your full name" required />
+          <input type="text" id="onboardName" placeholder="Enter your full name" />
         </div>
 
         <div>
           <label class="field-label" for="onboardPhone">Phone Number</label>
-          <input type="tel" id="onboardPhone" placeholder="Enter 10-digit mobile number" required />
+          <input type="tel" id="onboardPhone" placeholder="Enter mobile number" />
         </div>
 
         <div>
           <label class="field-label" for="onboardAddress">Full Address</label>
-          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, locality" required></textarea>
+          <textarea id="onboardAddress" rows="2" placeholder="House / flat no., street, locality"></textarea>
         </div>
 
         <div>
           <label class="field-label" for="onboardLandmark">Landmark</label>
-          <input type="text" id="onboardLandmark" placeholder="Nearby landmark (e.g., near temple, chowk)" required />
+          <input type="text" id="onboardLandmark" placeholder="Nearby landmark (e.g., near temple, chowk)" />
         </div>
 
         <div class="two-col">
           <div>
             <label class="field-label" for="onboardState">State</label>
-            <input type="text" id="onboardState" placeholder="Enter state" required />
+            <input type="text" id="onboardState" placeholder="Enter state" />
           </div>
 
           <div>
             <label class="field-label" for="onboardPincode">Pincode</label>
-            <input type="text" id="onboardPincode" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" required />
+            <input type="text" id="onboardPincode" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" />
           </div>
         </div>
 
         <div>
           <label class="field-label" for="onboardLocation">Current Location</label>
           <div class="loc-row-input">
-            <input type="text" id="onboardLocation" placeholder="Tap Use Location to get current GPS location" required />
-            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="handleUseLocationClick()">Use Location</button>
+            <input type="text" id="onboardLocation" placeholder="Tap Use Location and allow permission" />
+            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="requestLocationPermission()">Use Location</button>
           </div>
           <div class="status-pill-inline" id="gpsStatusText"></div>
         </div>
@@ -745,12 +746,12 @@
       </form>
 
       <div class="error-banner" id="onboardingError">
-        Please fill in all fields (name, phone, address, landmark, state, pincode, and location) to continue.
+        Please fill in your name, phone number, full address, landmark, state, pincode, and location.
       </div>
     </div>
   </div>
 
-  <!-- Step 2: Main App View -->
+  <!-- Step 2: Main App Screen -->
   <div class="app-shell" id="appShell">
     <header class="top-bar">
       <div class="top-bar-inner">
@@ -820,4 +821,4 @@
           <span class="panel-sub" id="cartCountLabel">0 items</span>
         </div>
 
-        <div id
+        <div id="cartList" 
