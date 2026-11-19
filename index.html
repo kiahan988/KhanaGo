@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KhanaGo — Fresh Food Delivered</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>" type="image/svg+xml">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E04F26'/%3E%3Cpath d='M22 16v14c0 3.3 2.7 6 6 6v12h4V36c3.3 0 6-2.7 6-6V16h-4v11h-3V16h-4v11h-3V16h-4zm20 0v32h4V16h-4z' fill='%23ffffff'/%3E%3C/svg%3E" />
   <style>
     :root {
       --primary: #E04F26;
@@ -60,18 +60,18 @@
     .brand-header {
       display: flex;
       align-items: center;
-      gap: 11px;
-      margin-bottom: 14px;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .logo-badge {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
       background: var(--primary);
-      color: #fff;
-      font-weight: 800;
-      font-size: 20px;
+      color: #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -250,12 +250,31 @@
       gap: 10px;
     }
 
+    .mini-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .mini-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .loc-header-btn {
       flex: 1;
+      min-width: 0;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 11px;
-      padding: 8px 11px;
+      padding: 7px 11px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -664,7 +683,11 @@
   <div class="onboarding-wrap" id="onboardingScreen">
     <div class="onboarding-card">
       <div class="brand-header">
-        <div class="logo-badge">K</div>
+        <div class="logo-badge" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
+          </svg>
+        </div>
         <div>
           <div class="brand-name">KhanaGo</div>
           <div class="brand-tagline">Fast &amp; fresh food delivery</div>
@@ -711,7 +734,7 @@
           <label class="field-label" for="onboardLocation">Current Location</label>
           <div class="loc-row-input">
             <input type="text" id="onboardLocation" placeholder="Tap Use Location to get current GPS location" required />
-            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="fetchCurrentLocation()">Use Location</button>
+            <button type="button" class="btn btn-outline btn-sm" id="useLocationBtn" onclick="handleUseLocationClick()">Use Location</button>
           </div>
           <div class="status-pill-inline" id="gpsStatusText"></div>
         </div>
@@ -732,6 +755,14 @@
     <header class="top-bar">
       <div class="top-bar-inner">
         <div class="top-row">
+          <div class="mini-brand" onclick="navigateApp('home')" style="cursor:pointer;">
+            <div class="mini-logo" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
+              </svg>
+            </div>
+          </div>
+
           <button type="button" class="loc-header-btn" onclick="openOnboardingEditor()">
             <div style="min-width: 0;">
               <div class="loc-main" id="barLocationTitle">📍 Location</div>
@@ -789,37 +820,4 @@
           <span class="panel-sub" id="cartCountLabel">0 items</span>
         </div>
 
-        <div id="cartList" class="panel-sub">Your cart is empty.</div>
-
-        <div class="summary-line">
-          <span>Total Payable</span>
-          <span id="cartTotalVal">₹0</span>
-        </div>
-
-        <button type="button" class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="submitOrder()">
-          Place Order
-        </button>
-
-        <div class="order-confirm" id="orderConfirmBox"></div>
-      </section>
-
-      <!-- Help Chat -->
-      <section class="panel" id="sec-help">
-        <div class="panel-head">
-          <div>
-            <h2 class="panel-title">Help</h2>
-            <p class="panel-sub">Send a chat message for order or delivery assistance.</p>
-          </div>
-        </div>
-
-        <div class="chat-list" id="chatThread"></div>
-
-        <div class="loc-row-input">
-          <input type="text" id="helpMessageInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') postHelpMessage()" />
-          <button type="button" class="btn btn-primary" onclick="postHelpMessage()">Send</button>
-        </div>
-      </section>
-    </main>
-
-    <!-- Floating Bottom Navigation Bar -->
-    <div class="floatin
+        <div id
