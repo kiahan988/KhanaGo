@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KhanaGo — Fast & Fresh Food Delivery</title>
+  <style>
+    :root {
+      --primary: #D94E28;
+      --primary-dark: #B53B1A;
+      --bg: #FFFBF5;
+      --card: #FFFFFF;
+      --text: #1E1E1E;
+      --muted: #666666;
+      --border: #EFE4D6;
+      --accent-soft: #FDECE6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+
+    /* Header */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-tag {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Location Box */
+    .location-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      flex: 1;
+      max-width: 440px;
+    }
+
+    .location-text {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 600;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #D94E28 0%, #E86A43 100%);
+      color: #fff;
+      padding: 24px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .hero p {
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .food-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .food-rest {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .food-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .food-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .food-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .price {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    /* Cart Panel */
+    .cart-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 14px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .input-group {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #d8c8b8;
+      font-size: 14px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+
+    .order-msg {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #ecfdf5;
+      color: #065f46;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-badge">K</div>
+      <div>
+        <div class="brand-name">KhanaGo</div>
+        <div class="brand-tag">Garma-garam khana, aapke dwaar</div>
+      </div>
+    </div>
+
+    <div class="location-bar">
+      <span>📍</span>
+      <span class="location-text" id="locationDisplay">Location set karein...</span>
+      <button class="btn btn-primary" onclick="detectLocation()">Detect Location</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Bhookh lagi hai? KhanaGo haazir hai!</h1>
+      <p>Apne aas-paas ke best kitchens se fresh meals aur snacks turant order karein.</p>
+    </div>
+
+    <h2 class="section-title">Aaj ka Popular Menu</h2>
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <div class="cart-box">
+      <h2 class="section-title">Aapka Order Cart</h2>
+      <div id="cartItems">Cart abhi khaali hai. Upar se koi item add karein.</div>
+
+      <div class="input-group">
+        <input type="text" id="customerName" placeholder="Aapka naam likhein" />
+        <input type="text" id="customerAddress" placeholder="Delivery address / landmark likhein" />
+      </div>
+
+      <div class="total-row">
+        <span>Total Payable</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;" onclick="placeOrder()">
+        Order Place Karein
+      </button>
+
+      <div class="order-msg" id="orderConfirmation"></div>
+    </div>
+  </div>
+
+  <script>
+    const menuData = [
+      { id: 1, name: "Ghar jaisi Thali", restaurant: "Annapurna Kitchen", desc: "4 roti, dal tadka, seasonal sabzi, chawal aur salad.", price: 120 },
+      { id: 2, name: "Paneer Tikka Roll", restaurant: "Tandoor Junction", desc: "Soft paratha mein roasted paneer, pyaaz aur mint chutney.", price: 90 },
+      { id: 3, name: "Masala Kulhad Chai + Samosa (2 pcs)", restaurant: "Chai & Crunch", desc: "Adrak wali garam chai aur crispy aloo samosa.", price: 60 },
+      { id: 4, name: "Veg Biryani Bowl", restaurant: "Aroma Handi", desc: "Khushbudar basmati rice, mixed veggies aur raita.", price: 140 }
+    ];
+
+    let cart = {};
+
+    function renderMenu() {
+      const grid = document.getElementById("menuGrid");
+      grid.innerHTML = menuData.map(item => `
+        <div class="food-card">
+          <div>
+            <div class="food-rest">${item.restaurant}</div>
+            <div class="food-name">${item.name}</div>
+            <div class="food-desc">${item.desc}</div>
+          </div>
+          <div class="food-footer">
+            <span class="price">₹${item.price}</span>
+            <button class="btn btn-outline" onclick="addToCart(${item.id})">+ Add</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function addToCart(id) {
+      const item = menuData.find(f => f.id === id);
+      if (!cart[id]) {
+        cart[id] = { ...item, qty: 1 };
+      } else {
+        cart[id].qty += 1;
+      }
+      renderCart();
+    }
+
+    function changeQty(id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) {
+        delete cart[id];
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartItems");
+      const items = Object.values(cart);
+
+      if (items.length === 0) {
+        container.innerHTML = "Cart abhi khaali hai. Upar se koi item add karein.";
+        document.getElementById("cartTotal").innerText = "₹0";
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="cart-item">
+          <div>
+            <strong>${item.name}</strong><br />
+            <small>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</small>
+          </div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+            <span>${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+        </div>
+      `).join("");
+
+      const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      document.getElementById("cartTotal").innerText = `₹${total}`;
+    }
+
+    async function detectLocation() {
+      const display = document.getElementById("locationDisplay");
+      if (!navigator.geolocation) {
+        display.innerText = "GPS supported nahi hai, address niche likhein.";
+        return;
+      }
+
+      display.innerText = "Location detect ho rahi hai...";
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords;
+          try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+            const data = await res.json();
+            const area = data.address.suburb || data.address.neighbourhood || data.address.city || data.address.county || "Detected Area";
+            const city = data.address.city || data.address.state_district || data.address.state || "";
+            const fullLoc = `${area}${city ? ", " + city : ""}`;
+            display.innerText = fullLoc;
+            document.getElementById("customerAddress").value = data.display_name || fullLoc;
+          } catch (e) {
+            display.innerText = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
+          }
+        },
+        () => {
+          display.innerText = "Permission deny hui—address niche likhein.";
+        }
+      );
+    }
+
+    function placeOrder() {
+      const items = Object.values(cart);
+      const name = document.getElementById("customerName").value.trim();
+      const address = document.getElementById("customerAddress").value.trim();
+      const msgBox = document.getElementById("orderConfirmation");
+
+      if (items.length === 0) {
+        alert("Pehle cart mein kam se kam ek item add karein.");
+        return;
+      }
+      if (!name || !address) {
+        alert("Kripya apna naam aur delivery address bharein.");
+        return;
+      }
+
+      const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      msgBox.style.display = "block";
+      msgBox.innerHTML = `✅ <strong>Order Ready!</strong> Dhanyawad <strong>${name}</strong>, aapka ₹${total} ka order <em>(${address})</em> ke liye taiyaar hai. Agle step mein hum ise database aur Merchant/Admin dashboard se jodenge.`;
+    }
+
+    renderMenu();
+    renderCart();
+  </script>
+</body>
+</html>
