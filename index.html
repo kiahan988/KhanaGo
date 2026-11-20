@@ -141,6 +141,7 @@
       justify-content: center;
       gap: 6px;
       white-space: nowrap;
+      touch-action: manipulation;
     }
 
     .btn-primary {
@@ -148,10 +149,18 @@
       color: #fff;
     }
 
+    .btn-primary:active {
+      background: var(--primary-dark);
+    }
+
     .btn-outline {
       background: #fff;
       color: var(--primary);
       border: 1px solid var(--primary);
+    }
+
+    .btn-outline:active {
+      background: var(--soft);
     }
 
     .msg {
@@ -550,12 +559,12 @@
           <label class="lbl" for="inLocation">Location</label>
           <div class="loc-row">
             <input type="text" id="inLocation" placeholder="Tap Use Location or type location" />
-            <button type="button" class="btn btn-outline" id="btnUseLoc" onclick="fetchGps()">Use Location</button>
+            <button type="button" class="btn btn-outline" id="btnUseLoc">Use Location</button>
           </div>
           <div class="msg" id="locMsg"></div>
         </div>
 
-        <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" onclick="openMainApp()">
+        <button type="button" class="btn btn-primary" id="btnContinue" style="width:100%; padding:12px;">
           Continue to KhanaGo
         </button>
       </div>
@@ -568,13 +577,13 @@
     <header class="top-hdr">
       <div class="top-in">
         <div class="hdr-flex">
-          <button type="button" class="logo-box" style="width:36px; height:36px; border:none; cursor:pointer;" onclick="selectTab('home')" aria-label="Home">
+          <button type="button" class="logo-box" id="btnTopHome" style="width:36px; height:36px; border:none; cursor:pointer;" aria-label="Home">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
             </svg>
           </button>
 
-          <button type="button" class="addr-btn" onclick="openSetupView()">
+          <button type="button" class="addr-btn" id="btnEditAddr">
             <div style="min-width:0;">
               <div class="addr-1" id="topLoc">Location</div>
               <div class="addr-2" id="topAddr">Address</div>
@@ -582,20 +591,20 @@
             <span style="font-size:11px; font-weight:700; color:var(--primary);">Edit</span>
           </button>
 
-          <button type="button" class="btn btn-outline" style="padding:8px 11px; font-size:12px;" onclick="selectTab('help')">Help</button>
+          <button type="button" class="btn btn-outline" id="btnTopHelp" style="padding:8px 11px; font-size:12px;">Help</button>
         </div>
 
         <div class="rec-bar">
           <span>Delivering to: <strong id="recSummary">Self</strong></span>
           <div class="pill-wrap">
-            <button type="button" class="pill-btn active" id="btnSelf" onclick="setRecMode('self')">Self</button>
-            <button type="button" class="pill-btn" id="btnRec" onclick="setRecMode('receiver')">Receiver</button>
+            <button type="button" class="pill-btn active" id="btnSelf">Self</button>
+            <button type="button" class="pill-btn" id="btnRec">Receiver</button>
           </div>
         </div>
 
         <div class="rec-inputs" id="recInputs">
-          <input type="text" id="recName" placeholder="Receiver full name" oninput="saveRec()" />
-          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="saveRec()" />
+          <input type="text" id="recName" placeholder="Receiver full name" />
+          <input type="text" id="recPhone" placeholder="Receiver phone / note" />
         </div>
       </div>
     </header>
@@ -607,7 +616,7 @@
             <h2 class="title" style="margin:0;">Shops</h2>
             <p class="sub">Tap any shop to view its menu below.</p>
           </div>
-          <button type="button" class="btn btn-outline" style="padding:8px 12px; font-size:12px;" onclick="pickShop('ALL')">All Menus</button>
+          <button type="button" class="btn btn-outline" id="btnAllMenus" style="padding:8px 12px; font-size:12px;">All Menus</button>
         </div>
 
         <div class="shops-grid" id="shopsGrid"></div>
@@ -636,7 +645,7 @@
           <span id="cartTotal">₹0</span>
         </div>
 
-        <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" onclick="submitOrder()">
+        <button type="button" class="btn btn-primary" id="btnPlaceOrder" style="width:100%; padding:12px;">
           Place Order
         </button>
 
@@ -654,28 +663,28 @@
         <div class="chat-box" id="chatBox"></div>
 
         <div class="loc-row">
-          <input type="text" id="chatInput" placeholder="Write your message..." onkeydown="if(event.key==='Enter') addChat()" />
-          <button type="button" class="btn btn-primary" onclick="addChat()">Send</button>
+          <input type="text" id="chatInput" placeholder="Write your message..." />
+          <button type="button" class="btn btn-primary" id="btnSendChat">Send</button>
         </div>
       </section>
     </main>
 
     <div class="nav-fixed">
       <nav class="nav-pill" aria-label="Bottom Navigation">
-        <button type="button" class="nav-btn active" id="t-home" onclick="selectTab('home')">
+        <button type="button" class="nav-btn active" id="t-home">
           <span>🏠</span>
           <span>Home</span>
         </button>
-        <button type="button" class="nav-btn" id="t-shops" onclick="selectTab('shops')">
+        <button type="button" class="nav-btn" id="t-shops">
           <span>🏪</span>
           <span>Shops</span>
         </button>
-        <button type="button" class="nav-btn" id="t-cart" onclick="selectTab('cart')">
+        <button type="button" class="nav-btn" id="t-cart">
           <span class="badge" id="cartBadge">0</span>
           <span>🛒</span>
           <span>Cart</span>
         </button>
-        <button type="button" class="nav-btn" id="t-help" onclick="selectTab('help')">
+        <button type="button" class="nav-btn" id="t-help">
           <span>💬</span>
           <span>Help</span>
         </button>
@@ -684,77 +693,79 @@
   </div>
 
   <script>
-    const STORE = {
-      USER: "khanago_clean_user",
-      MODE: "khanago_clean_mode",
-      REC: "khanago_clean_rec",
-      CHAT: "khanago_clean_chat",
-      ORDERS: "khanago_clean_orders",
-      SHOPS: "khanago_merchant_shops"
-    };
+    (function () {
+      const STORE = {
+        USER: "khanago_v12_user",
+        MODE: "khanago_v12_mode",
+        REC: "khanago_v12_rec",
+        CHAT: "khanago_v12_chat",
+        ORDERS: "khanago_v12_orders",
+        SHOPS: "khanago_merchant_shops"
+      };
 
-    const baseShops = [
-      {
-        id: "annapurna-kitchen",
-        name: "Annapurna Kitchen",
-        category: "Home Meals",
-        rating: "4.6 ★",
-        eta: "25–30 mins",
-        items: [
-          { id: "ak-1", name: "Classic Home Thali", desc: "4 rotis, dal tadka, seasonal sabzi, rice, and salad.", price: 120 },
-          { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 85 }
-        ]
-      },
-      {
-        id: "tandoor-junction",
-        name: "Tandoor Junction",
-        category: "Rolls & Grills",
-        rating: "4.5 ★",
-        eta: "20–25 mins",
-        items: [
-          { id: "tj-1", name: "Paneer Tikka Roll", desc: "Soft paratha with roasted paneer and mint chutney.", price: 95 },
-          { id: "tj-2", name: "Soya Chaap Roll", desc: "Spiced chaap roll with onions and green chutney.", price: 100 }
-        ]
-      },
-      {
-        id: "chai-crunch",
-        name: "Chai & Crunch",
-        category: "Tea & Snacks",
-        rating: "4.8 ★",
-        eta: "15–20 mins",
-        items: [
-          { id: "cc-1", name: "Masala Chai + Samosa (2 pcs)", desc: "Hot spiced tea with two crispy samosas.", price: 60 },
-          { id: "cc-2", name: "Bread Pakora Plate (2 pcs)", desc: "Stuffed potato bread pakoras with chutney.", price: 50 }
-        ]
-      }
-    ];
-
-    function getShops() {
-      let extra = [];
-      try {
-        const raw = JSON.parse(localStorage.getItem(STORE.SHOPS) || "[]");
-        if (Array.isArray(raw)) {
-          extra = raw.map((s, i) => ({
-            id: s.id || `partner-${i}`,
-            name: s.name || "Partner Shop",
-            category: s.category || "Partner",
-            rating: s.rating || "4.5 ★",
-            eta: s.eta || "25–30 mins",
-            items: Array.isArray(s.items) ? s.items : (Array.isArray(s.menu) ? s.menu : [])
-          }));
+      const baseShops = [
+        {
+          id: "annapurna-kitchen",
+          name: "Annapurna Kitchen",
+          category: "Home Meals",
+          rating: "4.6 ★",
+          eta: "25–30 mins",
+          items: [
+            { id: "ak-1", name: "Classic Home Thali", desc: "4 rotis, dal tadka, seasonal sabzi, rice, and salad.", price: 120 },
+            { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 85 }
+          ]
+        },
+        {
+          id: "tandoor-junction",
+          name: "Tandoor Junction",
+          category: "Rolls & Grills",
+          rating: "4.5 ★",
+          eta: "20–25 mins",
+          items: [
+            { id: "tj-1", name: "Paneer Tikka Roll", desc: "Soft paratha with roasted paneer and mint chutney.", price: 95 },
+            { id: "tj-2", name: "Soya Chaap Roll", desc: "Spiced chaap roll with onions and green chutney.", price: 100 }
+          ]
+        },
+        {
+          id: "chai-crunch",
+          name: "Chai & Crunch",
+          category: "Tea & Snacks",
+          rating: "4.8 ★",
+          eta: "15–20 mins",
+          items: [
+            { id: "cc-1", name: "Masala Chai + Samosa (2 pcs)", desc: "Hot spiced tea with two crispy samosas.", price: 60 },
+            { id: "cc-2", name: "Bread Pakora Plate (2 pcs)", desc: "Stuffed potato bread pakoras with chutney.", price: 50 }
+          ]
         }
-      } catch (_) {}
+      ];
 
-      const map = new Map();
-      baseShops.forEach(s => map.set(s.id, s));
-      extra.forEach(s => map.set(s.id, s));
-      return Array.from(map.values());
-    }
+      function getShops() {
+        let extra = [];
+        try {
+          const raw = JSON.parse(localStorage.getItem(STORE.SHOPS) || "[]");
+          if (Array.isArray(raw)) {
+            extra = raw.map((s, i) => ({
+              id: s.id || `partner-${i}`,
+              name: s.name || "Partner Shop",
+              category: s.category || "Partner",
+              rating: s.rating || "4.5 ★",
+              eta: s.eta || "25–30 mins",
+              items: Array.isArray(s.items) ? s.items : (Array.isArray(s.menu) ? s.menu : [])
+            }));
+          }
+        } catch (_) {}
 
-    let shops = getShops();
-    let curShop = shops[0] ? shops[0].id : "ALL";
-    let cart = {};
-    let user = JSON.parse(localStorage.getItem(STORE.USER) || "null");
-    let recMode = localStorage.getItem(STORE.MODE) || "self";
-    let rec = JSON.parse(localStorage.getItem(STORE.REC) || '{"name":"","phone":""}');
-    let chats = JSON.parse(localStorage.g
+        const map = new Map();
+        baseShops.forEach(s => map.set(s.id, s));
+        extra.forEach(s => map.set(s.id, s));
+        return Array.from(map.values());
+      }
+
+      let shops = getShops();
+      let curShop = shops[0] ? shops[0].id : "ALL";
+      let cart = {};
+      let user = null;
+      try { user = JSON.parse(localStorage.getItem(STORE.USER) || "null"); } catch (_) {}
+      let recMode = localStorage.getItem(STORE.MODE) || "self";
+      let rec = { name: "", phone: "" };
+      try { rec = JSON.parse(localStorage.getItem(STORE.REC) || '{"name
