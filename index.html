@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KhanaGo — Fresh Food Delivered</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="KhanaGo" />
+  <title>KhanaGo</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E04F26'/%3E%3Cpath d='M22 16v14c0 3.3 2.7 6 6 6v12h4V36c3.3 0 6-2.7 6-6V16h-4v11h-3V16h-4v11h-3V16h-4zm20 0v32h4V16h-4z' fill='%23ffffff'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -26,44 +28,49 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: rgba(224, 79, 38, 0.15);
     }
 
-    body {
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
       line-height: 1.45;
       min-height: 100vh;
     }
 
-    #setupView {
+    /* Screen 1: Delivery Details */
+    #screenSetup {
       min-height: 100vh;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 16px;
+      padding: 18px 14px;
     }
 
-    .box {
+    .card-setup {
       width: 100%;
-      max-width: 470px;
+      max-width: 460px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.1);
     }
 
-    .brand {
+    .brand-bar {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
       padding-bottom: 12px;
+      margin-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
 
-    .logo {
+    .brand-badge {
       width: 44px;
       height: 44px;
       border-radius: 13px;
@@ -74,31 +81,31 @@
       flex-shrink: 0;
     }
 
-    .title {
+    .h-title {
       font-size: 18px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
-    .sub {
+    .h-sub {
       font-size: 12px;
       color: var(--muted);
     }
 
-    .form-col {
+    .fields-col {
       display: flex;
       flex-direction: column;
       gap: 11px;
       margin-top: 12px;
     }
 
-    .two-col {
+    .row-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .lbl {
+    .field-lbl {
       display: block;
       font-size: 11px;
       font-weight: 700;
@@ -108,10 +115,10 @@
       margin-bottom: 4px;
     }
 
-    .loc-bar {
-      display: grid;
-      grid-template-columns: 1fr auto;
+    .loc-group {
+      display: flex;
       gap: 8px;
+      align-items: stretch;
     }
 
     input, textarea {
@@ -121,7 +128,7 @@
       border: 1px solid #DCD6CE;
       background: #FCFBF9;
       color: var(--text);
-      font-size: 13px;
+      font-size: 14px;
     }
 
     input:focus, textarea:focus {
@@ -133,7 +140,7 @@
     .btn {
       border: none;
       border-radius: 11px;
-      padding: 10px 14px;
+      padding: 11px 14px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -142,30 +149,29 @@
       justify-content: center;
       gap: 6px;
       white-space: nowrap;
+      touch-action: manipulation;
     }
 
-    .btn-sm {
-      padding: 9px 12px;
-      font-size: 12px;
-      border-radius: 10px;
-    }
-
-    .btn-main {
+    .btn-primary {
       background: var(--primary);
       color: #fff;
     }
 
-    .btn-main:hover {
+    .btn-primary:active {
       background: var(--primary-dark);
     }
 
-    .btn-line {
+    .btn-outline {
       background: #fff;
       color: var(--primary);
       border: 1px solid var(--primary);
     }
 
-    .notice {
+    .btn-outline:active {
+      background: var(--soft);
+    }
+
+    .msg-banner {
       margin-top: 10px;
       padding: 10px 12px;
       border-radius: 10px;
@@ -174,33 +180,35 @@
       display: none;
     }
 
-    .notice.ok {
+    .msg-banner.ok {
       display: block;
       background: var(--ok-bg);
       color: var(--ok-text);
     }
 
-    .notice.err {
+    .msg-banner.err {
       display: block;
       background: var(--err-bg);
       color: var(--err-text);
     }
 
-    #appView {
+    /* Screen 2: Main App */
+    #screenApp {
       display: none;
+      width: 100%;
       padding-bottom: 100px;
     }
 
-    .top-hdr {
+    .sticky-top {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 50;
       background: #fff;
       border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
+      padding: 10px 14px;
     }
 
-    .top-hdr-in {
+    .sticky-inner {
       max-width: 960px;
       margin: 0 auto;
       display: flex;
@@ -208,28 +216,29 @@
       gap: 8px;
     }
 
-    .hdr-row {
+    .bar-top {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .addr-btn {
+    .loc-summary-btn {
       flex: 1;
       min-width: 0;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 11px;
-      padding: 7px 11px;
+      padding: 7px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       cursor: pointer;
       text-align: left;
+      touch-action: manipulation;
     }
 
-    .addr-main {
+    .loc-line-1 {
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
@@ -237,7 +246,7 @@
       text-overflow: ellipsis;
     }
 
-    .addr-sub {
+    .loc-line-2 {
       font-size: 11px;
       color: var(--muted);
       white-space: nowrap;
@@ -245,7 +254,7 @@
       text-overflow: ellipsis;
     }
 
-    .rec-bar {
+    .rec-strip {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -255,7 +264,7 @@
       color: var(--muted);
     }
 
-    .pill-group {
+    .seg-box {
       display: inline-flex;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -263,7 +272,7 @@
       padding: 2px;
     }
 
-    .pill-btn {
+    .seg-opt {
       border: none;
       background: transparent;
       color: var(--muted);
@@ -272,41 +281,42 @@
       padding: 4px 10px;
       border-radius: 999px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .pill-btn.active {
+    .seg-opt.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .rec-fields {
+    .rec-inputs {
       display: none;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
 
-    .rec-fields.open {
+    .rec-inputs.show {
       display: grid;
     }
 
-    .main-wrap {
+    .app-container {
       max-width: 960px;
-      margin: 16px auto 0;
-      padding: 0 16px;
+      margin: 14px auto 0;
+      padding: 0 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .card {
+    .panel-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 16px;
+      padding: 15px;
       scroll-margin-top: 130px;
     }
 
-    .card-head {
+    .panel-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -315,50 +325,51 @@
       flex-wrap: wrap;
     }
 
-    .grid-shops {
+    .shops-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
     }
 
-    .shop-card {
+    .shop-item {
       background: #FCFBF9;
       border: 1.5px solid var(--border);
       border-radius: 14px;
-      padding: 13px;
+      padding: 12px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 6px;
+      touch-action: manipulation;
     }
 
-    .shop-card.active {
+    .shop-item.active {
       background: var(--soft);
       border-color: var(--primary);
     }
 
-    .grid-menu {
+    .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 10px;
       margin-top: 14px;
       padding-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .item-card {
+    .dish-item {
       background: #FCFBF9;
       border: 1px solid var(--border);
       border-radius: 13px;
-      padding: 13px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 10px;
     }
 
-    .item-foot {
+    .dish-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -366,7 +377,7 @@
       border-top: 1px solid var(--border);
     }
 
-    .cart-line {
+    .cart-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -375,24 +386,25 @@
       font-size: 13px;
     }
 
-    .qty-box {
+    .qty-ctrl {
       display: flex;
       align-items: center;
       gap: 7px;
     }
 
     .qty-btn {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--primary);
       font-weight: 800;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .total-line {
+    .total-bar {
       display: flex;
       justify-content: space-between;
       font-size: 17px;
@@ -413,8 +425,8 @@
       gap: 8px;
     }
 
-    .msg-bubble {
-      max-width: 84%;
+    .chat-bubble {
+      max-width: 85%;
       padding: 8px 12px;
       border-radius: 12px;
       font-size: 12px;
@@ -423,19 +435,20 @@
       color: #fff;
     }
 
-    .nav-wrap {
+    /* Bottom Floating Dock */
+    .dock-fixed {
       position: fixed;
       bottom: 14px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: center;
-      padding: 0 16px;
-      z-index: 30;
+      padding: 0 14px;
+      z-index: 60;
       pointer-events: none;
     }
 
-    .nav-bar {
+    .dock-pill {
       pointer-events: auto;
       width: 100%;
       max-width: 420px;
@@ -446,10 +459,10 @@
       display: flex;
       justify-content: space-between;
       gap: 6px;
-      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 12px 26px -8px rgba(0, 0, 0, 0.18);
     }
 
-    .nav-btn {
+    .dock-tab {
       flex: 1;
       border: none;
       background: transparent;
@@ -464,17 +477,18 @@
       gap: 2px;
       cursor: pointer;
       position: relative;
+      touch-action: manipulation;
     }
 
-    .nav-btn.active {
+    .dock-tab.active {
       background: var(--primary);
       color: #fff;
     }
 
-    .badge {
+    .dock-badge {
       position: absolute;
       top: 2px;
-      right: 13px;
+      right: 12px;
       min-width: 17px;
       height: 17px;
       padding: 0 4px;
@@ -489,202 +503,206 @@
       justify-content: center;
     }
 
-    .nav-btn.active .badge {
+    .dock-tab.active .dock-badge {
       background: #fff;
       color: var(--primary);
       border-color: var(--primary);
     }
 
-    @media (max-width: 600px) {
-      .two-col, .loc-bar, .rec-fields, .grid-shops, .grid-menu {
+    @media (max-width: 560px) {
+      .row-2, .loc-group, .rec-inputs, .shops-grid, .menu-grid {
         grid-template-columns: 1fr;
+      }
+      .loc-group {
+        display: flex;
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Step 1: Customer Details -->
-  <div id="setupView">
-    <div class="box">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
+  <!-- Screen 1: Customer Details -->
+  <div id="screenSetup">
+    <div class="card-setup">
+      <div class="brand-bar">
+        <div class="brand-badge" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
           </svg>
         </div>
         <div>
           <div style="font-size:20px; font-weight:800; line-height:1.15;">KhanaGo</div>
-          <div class="sub">Fast &amp; fresh food delivery</div>
+          <div class="h-sub">Fast &amp; fresh food delivery</div>
         </div>
       </div>
 
-      <h1 class="title">Delivery Details</h1>
-      <p class="sub">Enter your details and location to continue to the app.</p>
+      <h1 class="h-title">Delivery Details</h1>
+      <p class="h-sub">Enter your details and location to open the app.</p>
 
-      <div class="form-col">
+      <div class="fields-col">
         <div>
-          <label class="lbl" for="fName">Full Name</label>
-          <input type="text" id="fName" placeholder="Enter your name" />
+          <label class="field-lbl" for="inName">Full Name</label>
+          <input type="text" id="inName" placeholder="Enter your name" />
         </div>
 
         <div>
-          <label class="lbl" for="fPhone">Phone Number</label>
-          <input type="tel" id="fPhone" placeholder="Enter mobile number" />
+          <label class="field-lbl" for="inPhone">Phone Number</label>
+          <input type="tel" id="inPhone" placeholder="Enter mobile number" />
         </div>
 
         <div>
-          <label class="lbl" for="fAddress">Full Address</label>
-          <textarea id="fAddress" rows="2" placeholder="House / flat no., street, area"></textarea>
+          <label class="field-lbl" for="inAddress">Full Address</label>
+          <textarea id="inAddress" rows="2" placeholder="House / flat no., street, locality"></textarea>
         </div>
 
         <div>
-          <label class="lbl" for="fLandmark">Landmark</label>
-          <input type="text" id="fLandmark" placeholder="Nearby landmark" />
+          <label class="field-lbl" for="inLandmark">Landmark</label>
+          <input type="text" id="inLandmark" placeholder="Nearby landmark" />
         </div>
 
-        <div class="two-col">
+        <div class="row-2">
           <div>
-            <label class="lbl" for="fState">State</label>
-            <input type="text" id="fState" placeholder="State" />
+            <label class="field-lbl" for="inState">State</label>
+            <input type="text" id="inState" placeholder="State" />
           </div>
           <div>
-            <label class="lbl" for="fPincode">Pincode</label>
-            <input type="text" id="fPincode" inputmode="numeric" maxlength="6" placeholder="Pincode" />
+            <label class="field-lbl" for="inPincode">Pincode</label>
+            <input type="text" id="inPincode" inputmode="numeric" maxlength="6" placeholder="Pincode" />
           </div>
         </div>
 
         <div>
-          <label class="lbl" for="fLocation">Location</label>
-          <div class="loc-bar">
-            <input type="text" id="fLocation" placeholder="Tap Use Location or type location" />
-            <button type="button" class="btn btn-line btn-sm" id="btnUseLoc" onclick="getLocNow()">Use Location</button>
+          <label class="field-lbl" for="inLocation">Location</label>
+          <div class="loc-group">
+            <input type="text" id="inLocation" placeholder="Tap Use Location or type location" />
+            <button type="button" class="btn btn-outline" id="btnUseLocation" onclick="askLocation()">Use Location</button>
           </div>
-          <div class="notice" id="locNotice"></div>
+          <div class="msg-banner" id="locBanner"></div>
         </div>
 
-        <button type="button" class="btn btn-main" style="width:100%; padding:12px;" onclick="goToApp()">
+        <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" id="btnContinue" onclick="enterApp()">
           Continue to KhanaGo
         </button>
       </div>
 
-      <div class="notice" id="setupNotice"></div>
+      <div class="msg-banner" id="setupBanner"></div>
     </div>
   </div>
 
-  <!-- Step 2: Main App -->
-  <div id="appView">
-    <header class="top-hdr">
-      <div class="top-hdr-in">
-        <div class="hdr-row">
-          <div class="logo" style="width:34px; height:34px; border-radius:10px; cursor:pointer;" onclick="goTab('home')">
+  <!-- Screen 2: Main App -->
+  <div id="screenApp">
+    <header class="sticky-top">
+      <div class="sticky-inner">
+        <div class="bar-top">
+          <button type="button" class="brand-badge" style="width:36px; height:36px; border-radius:10px; border:none; cursor:pointer;" onclick="openTab('home')" aria-label="Home">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M5 3v7a3 3 0 0 0 3 3v8h2v-8a3 3 0 0 0 3-3V3h-2v5H9V3H7v5H5V3zm12 0v18h2V3h-2z" fill="#FFFFFF"/>
             </svg>
-          </div>
+          </button>
 
-          <button type="button" class="addr-btn" onclick="openSetup()">
+          <button type="button" class="loc-summary-btn" onclick="openSetupScreen()">
             <div style="min-width:0;">
-              <div class="addr-main" id="topLoc">📍 Location</div>
-              <div class="addr-sub" id="topAddr">Address</div>
+              <div class="loc-line-1" id="appLocTitle">📍 Location</div>
+              <div class="loc-line-2" id="appAddrSub">Address</div>
             </div>
             <span style="font-size:11px; font-weight:700; color:var(--primary);">Edit</span>
           </button>
 
-          <button type="button" class="btn btn-line btn-sm" onclick="goTab('help')">Help</button>
+          <button type="button" class="btn btn-outline" style="padding:8px 11px; font-size:12px;" onclick="openTab('help')">Help</button>
         </div>
 
-        <div class="rec-bar">
-          <span>Delivering to: <strong id="recSummary">Self</strong></span>
-          <div class="pill-group">
-            <button type="button" class="pill-btn active" id="pSelf" onclick="changeRecMode('self')">Self</button>
-            <button type="button" class="pill-btn" id="pRec" onclick="changeRecMode('receiver')">Receiver</button>
+        <div class="rec-strip">
+          <span>Delivering to: <strong id="recText">Self</strong></span>
+          <div class="seg-box">
+            <button type="button" class="seg-opt active" id="optSelf" onclick="chooseRecipient('self')">Self</button>
+            <button type="button" class="seg-opt" id="optRec" onclick="chooseRecipient('receiver')">Receiver</button>
           </div>
         </div>
 
-        <div class="rec-fields" id="recBox">
-          <input type="text" id="recName" placeholder="Receiver full name" oninput="saveRec()" />
-          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="saveRec()" />
+        <div class="rec-inputs" id="recInputs">
+          <input type="text" id="recName" placeholder="Receiver full name" oninput="persistReceiver()" />
+          <input type="text" id="recPhone" placeholder="Receiver phone / note" oninput="persistReceiver()" />
         </div>
       </div>
     </header>
 
-    <main class="main-wrap">
-      <section class="card" id="secShops">
-        <div class="card-head">
+    <main class="app-container">
+      <section class="panel-box" id="sec-shops">
+        <div class="panel-top">
           <div>
-            <h2 class="title" style="margin:0;">Shops</h2>
-            <p class="sub">Tap any shop to view its menu below.</p>
+            <h2 class="h-title" style="margin:0;">Shops</h2>
+            <p class="h-sub">Tap any shop to view its menu below.</p>
           </div>
-          <button type="button" class="btn btn-line btn-sm" onclick="pickShop('ALL')">All Menus</button>
+          <button type="button" class="btn btn-outline" style="padding:8px 12px; font-size:12px;" onclick="selectShop('ALL')">All Menus</button>
         </div>
 
-        <div class="grid-shops" id="shopsGrid"></div>
+        <div class="shops-grid" id="shopsGrid"></div>
 
         <div>
-          <div class="card-head" style="margin-top:16px; margin-bottom:0;">
+          <div class="panel-top" style="margin-top:16px; margin-bottom:0;">
             <div>
-              <h3 class="title" id="menuHead" style="font-size:15px; margin:0;">Menu</h3>
-              <p class="sub" id="menuSub">Select a shop above</p>
+              <h3 class="h-title" id="menuTitle" style="font-size:15px; margin:0;">Menu</h3>
+              <p class="h-sub" id="menuSub">Select a shop above</p>
             </div>
           </div>
-          <div class="grid-menu" id="menuGrid"></div>
+          <div class="menu-grid" id="menuGrid"></div>
         </div>
       </section>
 
-      <section class="card" id="secCart">
-        <div class="card-head">
-          <h2 class="title" style="margin:0;">Cart</h2>
-          <span class="sub" id="cartCount">0 items</span>
+      <section class="panel-box" id="sec-cart">
+        <div class="panel-top">
+          <h2 class="h-title" style="margin:0;">Cart</h2>
+          <span class="h-sub" id="cartCount">0 items</span>
         </div>
 
-        <div id="cartItems" class="sub">Your cart is empty.</div>
+        <div id="cartItems" class="h-sub">Your cart is empty.</div>
 
-        <div class="total-line">
+        <div class="total-bar">
           <span>Total Payable</span>
           <span id="cartTotal">₹0</span>
         </div>
 
-        <button type="button" class="btn btn-main" style="width:100%; padding:12px;" onclick="placeOrderNow()">
+        <button type="button" class="btn btn-primary" style="width:100%; padding:12px;" onclick="placeOrder()">
           Place Order
         </button>
 
-        <div class="notice" id="orderNotice"></div>
+        <div class="msg-banner" id="orderBanner"></div>
       </section>
 
-      <section class="card" id="secHelp">
-        <div class="card-head">
+      <section class="panel-box" id="sec-help">
+        <div class="panel-top">
           <div>
-            <h2 class="title" style="margin:0;">Help</h2>
-            <p class="sub">Send a message for support.</p>
+            <h2 class="h-title" style="margin:0;">Help</h2>
+            <p class="h-sub">Send a message for support.</p>
           </div>
         </div>
 
         <div class="chat-box" id="chatList"></div>
 
-        <div class="loc-bar">
-          <input type="text" id="chatInput" placeholder="Write your message..." onkeydown="if(event.key==='Enter') sendChatMsg()" />
-          <button type="button" class="btn btn-main" onclick="sendChatMsg()">Send</button>
+        <div class="loc-group">
+          <input type="text" id="chatInput" placeholder="Write your message..." onkeydown="if(event.key==='Enter') sendChat()" />
+          <button type="button" class="btn btn-primary" onclick="sendChat()">Send</button>
         </div>
       </section>
     </main>
 
-    <div class="nav-wrap">
-      <nav class="nav-bar" aria-label="Bottom Navigation">
-        <button type="button" class="nav-btn active" id="n-home" onclick="goTab('home')">
+    <div class="dock-fixed">
+      <nav class="dock-pill" aria-label="Bottom Navigation">
+        <button type="button" class="dock-tab active" id="tab-home" onclick="openTab('home')">
           <span>🏠</span>
           <span>Home</span>
         </button>
-        <button type="button" class="nav-btn" id="n-shops" onclick="goTab('shops')">
+        <button type="button" class="dock-tab" id="tab-shops" onclick="openTab('shops')">
           <span>🏪</span>
           <span>Shops</span>
         </button>
-        <button type="button" class="nav-btn" id="n-cart" onclick="goTab('cart')">
-          <span class="badge" id="cartBadge">0</span>
+        <button type="button" class="dock-tab" id="tab-cart" onclick="openTab('cart')">
+          <span class="dock-badge" id="cartBadge">0</span>
           <span>🛒</span>
           <span>Cart</span>
         </button>
-        <button type="button" class="nav-btn" id="n-help" onclick="goTab('help')">
+        <button type="button" class="dock-tab" id="tab-help" onclick="openTab('help')">
           <span>💬</span>
           <span>Help</span>
         </button>
@@ -693,16 +711,16 @@
   </div>
 
   <script>
-    const DB = {
-      USER: "khanago_user_final_v1",
-      MODE: "khanago_mode_final_v1",
-      REC: "khanago_rec_final_v1",
-      CHAT: "khanago_chat_final_v1",
-      ORDERS: "khanago_orders_final_v1",
-      MERCHANT: "khanago_merchant_shops"
+    const STORE = {
+      USER: "khanago_v10_user",
+      MODE: "khanago_v10_mode",
+      REC: "khanago_v10_rec",
+      CHAT: "khanago_v10_chat",
+      ORDERS: "khanago_v10_orders",
+      SHOPS: "khanago_merchant_shops"
     };
 
-    const baseList = [
+    const baseShops = [
       {
         id: "annapurna-kitchen",
         name: "Annapurna Kitchen",
@@ -733,36 +751,4 @@
         eta: "15–20 mins",
         items: [
           { id: "cc-1", name: "Masala Chai + Samosa (2 pcs)", desc: "Hot spiced tea with two crispy samosas.", price: 60 },
-          { id: "cc-2", name: "Bread Pakora Plate (2 pcs)", desc: "Stuffed potato bread pakoras with chutney.", price: 50 }
-        ]
-      }
-    ];
-
-    function loadShops() {
-      let extra = [];
-      try {
-        const raw = JSON.parse(localStorage.getItem(DB.MERCHANT) || "[]");
-        if (Array.isArray(raw)) {
-          extra = raw.map((s, idx) => ({
-            id: s.id || `shop-${idx}`,
-            name: s.name || "Partner Shop",
-            category: s.category || "Partner",
-            rating: s.rating || "4.5 ★",
-            eta: s.eta || "25–30 mins",
-            items: Array.isArray(s.items) ? s.items : (Array.isArray(s.menu) ? s.menu : [])
-          }));
-        }
-      } catch (_) {}
-
-      const map = new Map();
-      baseList.forEach(s => map.set(s.id, s));
-      extra.forEach(s => map.set(s.id, s));
-      return Array.from(map.values());
-    }
-
-    let shops = loadShops();
-    let curShop = shops[0] ? shops[0].id : "ALL";
-    let cart = {};
-    let user = JSON.parse(localStorage.getItem(DB.USER) || "null");
-    let recMode = localStorage.getItem(DB.MODE) || "self";
-    le
+          { id: "cc-2", name: "Bread P
