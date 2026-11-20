@@ -3,10 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#E04F26" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="KhanaGo" />
   <title>KhanaGo</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E04F26'/%3E%3Cpath d='M22 16v14c0 3.3 2.7 6 6 6v12h4V36c3.3 0 6-2.7 6-6V16h-4v11h-3V16h-4v11h-3V16h-4zm20 0v32h4V16h-4z' fill='%23ffffff'/%3E%3C/svg%3E" />
+  <link id="appIconLink" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E04F26'/%3E%3Cpath d='M22 16v14c0 3.3 2.7 6 6 6v12h4V36c3.3 0 6-2.7 6-6V16h-4v11h-3V16h-4v11h-3V16h-4zm20 0v32h4V16h-4z' fill='%23ffffff'/%3E%3C/svg%3E" />
+  <link id="appleIconLink" rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E04F26'/%3E%3Cpath d='M22 16v14c0 3.3 2.7 6 6 6v12h4V36c3.3 0 6-2.7 6-6V16h-4v11h-3V16h-4v11h-3V16h-4zm20 0v32h4V16h-4z' fill='%23ffffff'/%3E%3C/svg%3E" />
+  <link id="manifestLink" rel="manifest" href="" />
+  <script>
+    (function setupManifest() {
+      const iconSvg =
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%23E04F26'/%3E%3Cpath d='M66 48v42c0 9.9 8.1 18 18 18v36h12v-36c9.9 0 18-8.1 18-18V48h-12v33h-9V48h-12v33h-9V48H66zm60 0v96h12V48h-12z' fill='%23ffffff'/%3E%3C/svg%3E";
+      const manifestObj = {
+        name: "KhanaGo",
+        short_name: "KhanaGo",
+        description: "Fresh Food Delivered",
+        start_url: "./",
+        scope: "./",
+        display: "standalone",
+        background_color: "#F6F5F2",
+        theme_color: "#E04F26",
+        icons: [
+          {
+            src: iconSvg,
+            sizes: "192x192",
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ]
+      };
+      const blob = new Blob([JSON.stringify(manifestObj)], { type: "application/manifest+json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById("manifestLink");
+      if (link) link.href = url;
+    })();
+  </script>
   <style>
     :root {
       --primary: #E04F26;
@@ -701,54 +734,4 @@
           <span class="dock-badge" id="cartBadge">0</span>
           <span>🛒</span>
           <span>Cart</span>
-        </button>
-        <button type="button" class="dock-tab" id="tab-help" onclick="openTab('help')">
-          <span>💬</span>
-          <span>Help</span>
-        </button>
-      </nav>
-    </div>
-  </div>
-
-  <script>
-    const STORE = {
-      USER: "khanago_v10_user",
-      MODE: "khanago_v10_mode",
-      REC: "khanago_v10_rec",
-      CHAT: "khanago_v10_chat",
-      ORDERS: "khanago_v10_orders",
-      SHOPS: "khanago_merchant_shops"
-    };
-
-    const baseShops = [
-      {
-        id: "annapurna-kitchen",
-        name: "Annapurna Kitchen",
-        category: "Home Meals",
-        rating: "4.6 ★",
-        eta: "25–30 mins",
-        items: [
-          { id: "ak-1", name: "Classic Home Thali", desc: "4 rotis, dal tadka, seasonal sabzi, rice, and salad.", price: 120 },
-          { id: "ak-2", name: "Dal Chawal Combo", desc: "Ghee-tempered dal with steamed basmati rice.", price: 85 }
-        ]
-      },
-      {
-        id: "tandoor-junction",
-        name: "Tandoor Junction",
-        category: "Rolls & Grills",
-        rating: "4.5 ★",
-        eta: "20–25 mins",
-        items: [
-          { id: "tj-1", name: "Paneer Tikka Roll", desc: "Soft paratha with roasted paneer and mint chutney.", price: 95 },
-          { id: "tj-2", name: "Soya Chaap Roll", desc: "Spiced chaap roll with onions and green chutney.", price: 100 }
-        ]
-      },
-      {
-        id: "chai-crunch",
-        name: "Chai & Crunch",
-        category: "Tea & Snacks",
-        rating: "4.8 ★",
-        eta: "15–20 mins",
-        items: [
-          { id: "cc-1", name: "Masala Chai + Samosa (2 pcs)", desc: "Hot spiced tea with two crispy samosas.", price: 60 },
-          { id: "cc-2", name: "Bread P
+   
